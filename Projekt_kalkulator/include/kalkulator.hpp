@@ -26,6 +26,13 @@ public:
 
     std::vector<int>::const_iterator begin() const {return v_.cbegin(); }
     std::vector<int>::const_iterator end() const {return v_.cend(); }
+
+    //metoda zwracająca rozmiar wektora
+    std::size_t size() const { return v_.size(); }
+
+    //metoda zwracająca normę wektora
+    double norm() const;
+
 private:
     std::vector<int> v_;
 };
