@@ -37,6 +37,9 @@ private:
     std::vector<int> v_;
 };
 
+//dodawanie wektorów
+Vect add_vectors(const Vect& v1, const Vect& v2);
+
 //klasa odpowiadająca za wielomiany
 class Polynomial{
 public:
