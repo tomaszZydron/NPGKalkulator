@@ -19,3 +19,20 @@ Vect add_vectors(const Vect& v1, const Vect& v2) {
 
     return v_sum;
 }
+
+//funkcja zwracająca większą liczbę
+std::size_t size_t_max(int a, int b)
+{
+    if(a>b) return a;
+    return b;
+}
+
+//suma wielomianów
+Polynomial add_polynomials(const Polynomial& p1, const Polynomial& p2)
+{
+    std::size_t size = size_t_max(p1.get_size(), p2.get_size());
+    Polynomial sumvect = Polynomial(size);
+    for(std::size_t i = 0; i < size; i++) sumvect[i] += p1[i] + p2[i];
+    return sumvect;
+
+}
