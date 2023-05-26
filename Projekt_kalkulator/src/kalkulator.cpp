@@ -20,6 +20,24 @@ Vect add_vectors(const Vect& v1, const Vect& v2) {
     return v_sum;
 }
 
+//iloczyn skalarny wektorów
+int scalar_product(const Vect& v1, const Vect& v2) {
+    int scalar = 0;
+    for(std::size_t i = 0; i < v1.size(); i++){
+        scalar += v1[i] * v2[i];
+    }
+    return scalar;
+}
+
+//mnożenie wektora przez skalar
+Vect multiply_vector(const Vect& v, int scalar){
+    Vect multiplied_vect(v.size());
+    for(std::size_t i = 0; i < v.size(); i++) {
+        multiplied_vect[i] = scalar * v[i];
+    }
+    return multiplied_vect;
+}
+
 //funkcja zwracająca większą liczbę
 std::size_t size_t_max(int a, int b)
 {

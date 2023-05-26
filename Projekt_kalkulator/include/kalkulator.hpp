@@ -40,6 +40,12 @@ private:
 //dodawanie wektorów
 Vect add_vectors(const Vect& v1, const Vect& v2);
 
+//iloczyn skalarny wektorów
+int scalar_product(const Vect& v1, const Vect& v2);
+
+//mnożenie wektora przez skalar
+Vect multiply_vector(const Vect& v, int scalar);
+
 //klasa odpowiadająca za wielomiany
 class Polynomial{
 public:
