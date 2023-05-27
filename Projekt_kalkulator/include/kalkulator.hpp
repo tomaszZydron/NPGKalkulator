@@ -6,7 +6,7 @@
 #include <cstddef>
 #include <string>
 
-//klasa odpoiwadająca za wektory
+//klasa odpowiadająca za wektory
 class Vect {
 public:
     //konstruktory
@@ -45,6 +45,34 @@ int scalar_product(const Vect& v1, const Vect& v2);
 
 //mnożenie wektora przez skalar
 Vect multiply_vector(const Vect& v, int scalar);
+
+//klasa odpowiadająca za macierze
+class Matrix {
+public:
+    Matrix(std::size_t n_rows, std::size_t n_cols) :
+            matrix_(n_rows, Vect(n_cols)) {}
+
+    Matrix(const Matrix&) = default;
+
+    Matrix(const std::vector<std::vector<int>>& m);
+
+    std::size_t size() const { return matrix_.size(); }
+
+    int sum() const;
+
+    const Vect& operator[](std::size_t pos) const { return matrix_[pos]; }
+    Vect& operator[](std::size_t pos) { return matrix_[pos]; }
+
+    std::vector<Vect>::const_iterator cbegin() const { return matrix_.cbegin(); }
+    std::vector<Vect>::const_iterator cend() const { return matrix_.cend(); }
+    std::vector<Vect>::iterator begin() { return matrix_.begin(); }
+    std::vector<Vect>::const_iterator begin() const { return matrix_.cbegin(); }
+    std::vector<Vect>::iterator end() { return matrix_.end(); }
+    std::vector<Vect>::const_iterator end() const { return matrix_.cend(); }
+
+private:
+    std::vector<Vect> matrix_;
+};
 
 //klasa odpowiadająca za wielomiany
 class Polynomial{
