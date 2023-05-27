@@ -46,6 +46,12 @@ int scalar_product(const Vect& v1, const Vect& v2);
 //mnożenie wektora przez skalar
 Vect multiply_vector(const Vect& v, int scalar);
 
+//czy dwa wektory są zależne
+bool two_vector_dependance(const Vect& v1, const Vect& v2);
+
+//wektor na stringa
+std::string vector_to_string(const Vect& v);
+
 //klasa odpowiadająca za macierze
 class Matrix {
 public:

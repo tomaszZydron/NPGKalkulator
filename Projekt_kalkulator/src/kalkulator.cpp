@@ -40,6 +40,27 @@ Vect multiply_vector(const Vect& v, int scalar){
     return multiplied_vect;
 }
 
+bool two_vector_dependance(const Vect& v1, const Vect& v2){
+    //brak wersji dla wartości 0 -- poprawić
+    for(size_t i =0; i < v1.size() - 1; i++){
+        if(v1[i]/v2[i] != v1[i+1]/v2[i+1])
+            return 0;
+        }
+    return 1;
+}
+
+std::string vector_to_string(const Vect& v){
+    std::ostringstream to_string;
+    to_string << "[";
+    for(auto i = v.cbegin(); i != v.cend(); ++i){
+        if(i != v.cend() - 1) {
+            to_string << *i << "; ";
+        }
+    }
+    to_string << "]";
+    return to_string.str();
+}
+
 //funkcja zwracająca większą liczbę
 std::size_t size_t_max(std::size_t a, std::size_t b)
 {
