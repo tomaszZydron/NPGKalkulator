@@ -5,6 +5,8 @@
 #include <sstream>
 #include <algorithm>
 #include <numeric>
+#include <string>
+#include <math.h>
 
 //norma wektora
 double Vect::norm() const {
@@ -39,7 +41,7 @@ Vect multiply_vector(const Vect& v, int scalar){
 }
 
 //funkcja zwracająca większą liczbę
-std::size_t size_t_max(int a, int b)
+std::size_t size_t_max(std::size_t a, std::size_t b)
 {
     if(a>b) return a;
     return b;
@@ -53,4 +55,42 @@ Polynomial add_polynomials(const Polynomial& p1, const Polynomial& p2)
     for(std::size_t i = 0; i < size; i++) sumvect[i] += p1[i] + p2[i];
     return sumvect;
 
+}
+
+std::string to_str(const Polynomial& v)
+{
+    std::ostringstream oss;
+    for(int i = v.get_size() - 1; i >= 0; i--)
+    {
+        if(v[i] != 0)
+        {
+            if ((i != v.get_size() - 1) && (v[i] > 0)) oss << " + ";
+            if ((i != v.get_size() - 1) && (v[i] < 0)) oss << " - ";
+            if (i == v.get_size() - 1) oss << v[i] << "*x^" << i;
+            if (i != v.get_size() - 1) oss << abs(v[i]) << "*x^" << i;
+        }
+    }
+    return oss.str();
+}
+
+Polynomial derivate(const Polynomial& polinomial)
+{
+    std::size_t pol_size = polinomial.get_size();
+    Polynomial derivative = Polynomial(pol_size - 1);
+    for(std::size_t i = 0; i < pol_size - 1; i++)
+    {
+        derivative[i] = (i + 1)*polinomial[i+1];
+    }
+    return derivative;
+}
+
+Polynomial integral(const Polynomial& polinomial)
+{
+    std::size_t pol_size = polinomial.get_size();
+    Polynomial integral_pol = Polynomial(pol_size + 1);
+    for(int i = 1; i < (int) pol_size + 1; i++)
+    {
+        integral_pol[i] = polinomial[i - 1]/i;
+    }
+    return integral_pol;
 }
