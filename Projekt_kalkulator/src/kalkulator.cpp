@@ -61,6 +61,19 @@ std::string vector_to_string(const Vect& v){
     return to_string.str();
 }
 
+//konstruktor kopiujący?
+Matrix::Matrix(const std::vector<std::vector<int>>& m) {
+    std::copy(m.begin(), m.end(), std::back_inserter(matrix_));
+}
+//dodawanie macierzy
+Matrix add_matrices(const Matrix& m1, const Matrix& m2){
+    Matrix matrices_sum(m1);
+    for(std::size_t i = 0; i < m1.size(); i++){
+        matrices_sum[i] = add_vectors(m1[i], m2[i]);
+    }
+    return matrices_sum;
+}
+
 //funkcja zwracająca większą liczbę
 std::size_t size_t_max(std::size_t a, std::size_t b)
 {

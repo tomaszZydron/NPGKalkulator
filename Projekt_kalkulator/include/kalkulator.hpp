@@ -53,9 +53,9 @@ bool two_vector_dependance(const Vect& v1, const Vect& v2);
 std::string vector_to_string(const Vect& v);
 
 //klasa odpowiadająca za macierze
-//branch matrix 
 class Matrix {
 public:
+    //konstruktory
     Matrix(std::size_t n_rows, std::size_t n_cols) :
             matrix_(n_rows, Vect(n_cols)) {}
 
@@ -65,11 +65,11 @@ public:
 
     std::size_t size() const { return matrix_.size(); }
 
-    int sum() const;
-
+    //operatory
     const Vect& operator[](std::size_t pos) const { return matrix_[pos]; }
     Vect& operator[](std::size_t pos) { return matrix_[pos]; }
 
+    //iteratory
     std::vector<Vect>::const_iterator cbegin() const { return matrix_.cbegin(); }
     std::vector<Vect>::const_iterator cend() const { return matrix_.cend(); }
     std::vector<Vect>::iterator begin() { return matrix_.begin(); }
@@ -80,6 +80,9 @@ public:
 private:
     std::vector<Vect> matrix_;
 };
+
+//dodawanie macierzy
+Matrix add_matrices(const Matrix& m1, const Matrix& m2);
 
 //klasa odpowiadająca za wielomiany
 class Polynomial{
