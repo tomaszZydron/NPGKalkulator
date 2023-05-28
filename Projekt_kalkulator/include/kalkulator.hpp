@@ -53,6 +53,7 @@ bool two_vector_dependance(const Vect& v1, const Vect& v2);
 std::string vector_to_string(const Vect& v);
 
 //klasa odpowiadająca za macierze
+//branch matrix 
 class Matrix {
 public:
     Matrix(std::size_t n_rows, std::size_t n_cols) :
