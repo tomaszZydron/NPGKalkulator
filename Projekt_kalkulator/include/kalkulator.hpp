@@ -58,6 +58,7 @@ public:
     Polynomial(int size, float val = 0) : coeficient_(size, val) {}
     Polynomial(const std::vector<float>& v) : coeficient_(v) {}
     int get_size() const {return coeficient_.size();}
+    ~Polynomial() = default;
     const float& operator[](std::size_t pos) const { return coeficient_[pos]; }
     float& operator[](std::size_t pos) { return coeficient_[pos]; }
 private:
@@ -74,5 +75,6 @@ Polynomial derivate(const Polynomial& polinomial);
 
 Polynomial integral(const Polynomial& polinomial);
 
+Polynomial polynomial_multiplication(const Polynomial& p1, const Polynomial& p2);
 
 #endif //PROJEKT_KALKULATOR_KALKULATOR_HPP

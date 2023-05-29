@@ -77,7 +77,7 @@ Polynomial add_polynomials(const Polynomial& p1, const Polynomial& p2)
     return sumvect;
 
 }
-
+//wielomian jako string
 std::string to_str(const Polynomial& v)
 {
     std::ostringstream oss;
@@ -93,7 +93,7 @@ std::string to_str(const Polynomial& v)
     }
     return oss.str();
 }
-
+//pochodna
 Polynomial derivate(const Polynomial& polinomial)
 {
     std::size_t pol_size = polinomial.get_size();
@@ -104,7 +104,7 @@ Polynomial derivate(const Polynomial& polinomial)
     }
     return derivative;
 }
-
+//całka
 Polynomial integral(const Polynomial& polinomial)
 {
     std::size_t pol_size = polinomial.get_size();
@@ -114,4 +114,16 @@ Polynomial integral(const Polynomial& polinomial)
         integral_pol[i] = polinomial[i - 1]/i;
     }
     return integral_pol;
+}
+//mnożenie wielomianów
+Polynomial polynomial_multiplication(const Polynomial& p1, const Polynomial& p2)
+{
+    Polynomial result = Polynomial(p1.get_size() + p2.get_size() - 1);
+    for(int i = 0; i < p1.get_size(); i++)
+    {
+        for(int j = 0; j < p2.get_size(); j++)
+        {
+            result[i+j] += p1[i] + p2[j];
+        }
+    }
 }
