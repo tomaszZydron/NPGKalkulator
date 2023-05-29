@@ -83,6 +83,19 @@ Matrix multiply_matrix(const Matrix& m, int scalar){
     return multiplied_matrix;
 }
 
+//macierz transponowana
+Matrix transpose_matrix(const Matrix& m){
+    std::size_t m_cols = m[0].size();
+    std::size_t m_rows = m.size();
+    Matrix transpose(m_cols, m_rows);
+    for (std::size_t i = 0; i < m_cols; i++){
+        for(std::size_t j = 0; j < m_cols; j++){
+            transpose[i][j] = m[j][i];
+        }
+    }
+    return transpose;
+}
+
 //funkcja zwracająca większą liczbę
 std::size_t size_t_max(std::size_t a, std::size_t b)
 {

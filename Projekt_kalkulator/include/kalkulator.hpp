@@ -84,6 +84,9 @@ private:
 //dodawanie macierzy
 Matrix add_matrices(const Matrix& m1, const Matrix& m2);
 
+//macierz transponowana
+Matrix transpose_matrix(const Matrix& m);
+
 //klasa odpowiadająca za wielomiany
 class Polynomial{
 public:
