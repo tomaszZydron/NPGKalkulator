@@ -74,6 +74,15 @@ Matrix add_matrices(const Matrix& m1, const Matrix& m2){
     return matrices_sum;
 }
 
+//mnożenie macierzy przez skalar
+Matrix multiply_matrix(const Matrix& m, int scalar){
+    Matrix multiplied_matrix(m);
+    for(std::size_t i = 0; i < m.size(); i++){
+        multiplied_matrix[i] = multiply_vector(m[i], scalar);
+    }
+    return multiplied_matrix;
+}
+
 //funkcja zwracająca większą liczbę
 std::size_t size_t_max(std::size_t a, std::size_t b)
 {
