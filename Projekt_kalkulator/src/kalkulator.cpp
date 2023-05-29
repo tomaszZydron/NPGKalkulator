@@ -87,8 +87,8 @@ std::string to_str(const Polynomial& v)
         {
             if ((i != v.get_size() - 1) && (v[i] > 0)) oss << " + ";
             if ((i != v.get_size() - 1) && (v[i] < 0)) oss << " - ";
-            if (i == v.get_size() - 1) oss << v[i] << "*x^" << i;
-            if (i != v.get_size() - 1) oss << abs(v[i]) << "*x^" << i;
+            if (i == v.get_size() - 1 && i != 0) oss << v[i] << "*x^" << i;
+            if (i != v.get_size() - 1 && i != 0) oss << abs(v[i]) << "*x^" << i;
         }
     }
     return oss.str();
