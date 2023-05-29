@@ -87,6 +87,9 @@ Matrix add_matrices(const Matrix& m1, const Matrix& m2);
 //macierz transponowana
 Matrix transpose_matrix(const Matrix& m);
 
+//mnożenie macierzy przez skalar
+Matrix multiply_matrix(const Matrix& m, int scalar);
+
 //klasa odpowiadająca za wielomiany
 class Polynomial{
 public:
