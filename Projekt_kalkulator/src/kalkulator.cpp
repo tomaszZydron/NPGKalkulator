@@ -129,3 +129,25 @@ Polynomial polynomial_multiplication(const Polynomial& p1, const Polynomial& p2)
         }
     }
 }
+
+float pow(float a, int power)
+{
+    float answer = 1;
+    if (power >= 0) {
+        for (int i = 0; i < power; i++) {
+            answer *= a;
+        }
+    }
+    for (int i = 0; i > power; i--) {
+        answer /= a;
+    }
+}
+
+float value(const Polynomial& polynomial, float val)
+{
+    float result = 0;
+    std::size_t size = polynomial.get_size();
+    for(int i = 0; i < size; i++) result += polynomial[i] * pow(val, i);
+    return result;
+}
+

@@ -77,4 +77,8 @@ Polynomial integral(const Polynomial& polinomial);
 
 Polynomial polynomial_multiplication(const Polynomial& p1, const Polynomial& p2);
 
+float pow(float a, int power);
+
+float value(const Polynomial& polynomial, float val);
+
 #endif //PROJEKT_KALKULATOR_KALKULATOR_HPP
