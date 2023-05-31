@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-
+//dupa dasiujhvgiugaysdfoasbfdn
 int type_size_vec(){
     int size = 0;
     while (size <= 1){
