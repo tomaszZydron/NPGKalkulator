@@ -40,15 +40,22 @@ Vect multiply_vector(const Vect& v, int scalar){
     return multiplied_vect;
 }
 
+//zależność dwóch wektorów
 bool two_vector_dependance(const Vect& v1, const Vect& v2){
-    //brak wersji dla wartości 0 -- poprawić
+
     for(size_t i =0; i < v1.size() - 1; i++){
-        if(v1[i]/v2[i] != v1[i+1]/v2[i+1])
+        if(v2[i] != 0 and v2[i+1] != 0){
+            if(v1[i]/v2[i] != v1[i+1]/v2[i+1])
+                return 0;
+        }
+        else if((v2[i] == 0 and v1[i] != 0) or (v2[i+1] == 0 and v1[i+1] != 0)){
             return 0;
+        }
         }
     return 1;
 }
 
+//wektor na stringa
 std::string vector_to_string(const Vect& v){
     std::ostringstream to_string;
     to_string << "[";
