@@ -96,7 +96,7 @@ Matrix transpose_matrix(const Matrix& m){
     return transpose;
 }
 
-//mnożenie macierzy
+//mnożenie dwóch macierzy
 Matrix multiply_matrices(const Matrix& m1, const Matrix& m2 ){
     transpose_matrix(m2);
     std::size_t size = m1.size();
