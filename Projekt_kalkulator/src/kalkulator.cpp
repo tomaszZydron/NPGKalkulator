@@ -109,6 +109,16 @@ Matrix multiply_matrices(const Matrix& m1, const Matrix& m2 ){
     return result;
 }
 
+//liczenie wyznacznika macierzy
+float determinant_matrix(const Matrix& m){
+    float deter = 0;
+    if (m.size() == 1) {
+        //wyznacznik macierzy jednoelementowej to ten element
+        deter = m[0][0];
+    }
+    return deter;
+}
+
 //funkcja zwracająca większą liczbę
 std::size_t size_t_max(std::size_t a, std::size_t b)
 {
