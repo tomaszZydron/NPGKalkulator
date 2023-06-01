@@ -130,7 +130,7 @@ Polynomial polynomial_multiplication(const Polynomial& p1, const Polynomial& p2)
     }
     return result;
 }
-
+//potęga liczby
 float pow(float a, int power)
 {
     float answer = 1;
@@ -144,12 +144,20 @@ float pow(float a, int power)
     }
     return answer;
 }
-
+//wartość wielomianu dla argumentu
 float value(const Polynomial& polynomial, float val)
 {
     float result = 0;
     std::size_t size = polynomial.get_size();
     for(int i = 0; i < (int) size; i++) result += polynomial[i] * pow(val, i);
+    return result;
+}
+
+//mnożenie wielomianu przez skalar
+Polynomial multiplicate_polynomial(const Polynomial& p, float a)
+{
+    Polynomial result = p;
+    for(int i = 0; i < p.get_size(); i++) result[i] *= a;
     return result;
 }
 

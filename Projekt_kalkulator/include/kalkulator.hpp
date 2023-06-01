@@ -81,4 +81,6 @@ float pow(float a, int power);
 
 float value(const Polynomial& polynomial, float val);
 
+Polynomial multiplicate_polynomial(const Polynomial& p, float a);
+
 #endif //PROJEKT_KALKULATOR_KALKULATOR_HPP
