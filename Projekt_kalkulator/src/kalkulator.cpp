@@ -46,13 +46,13 @@ bool two_vector_dependance(const Vect& v1, const Vect& v2){
     for(size_t i =0; i < v1.size() - 1; i++){
         if(v2[i] != 0 and v2[i+1] != 0){
             if(v1[i]/v2[i] != v1[i+1]/v2[i+1])
-                return 0;
+                return false;
         }
         else if((v2[i] == 0 and v1[i] != 0) or (v2[i+1] == 0 and v1[i+1] != 0)){
-            return 0;
+            return false;
         }
         }
-    return 1;
+    return true;
 }
 
 //wektor na stringa
