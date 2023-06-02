@@ -69,6 +69,8 @@ Polynomial add_polynomials(const Polynomial& p1, const Polynomial& p2);
 
 std::size_t size_t_max(int a, int b);
 
+int intmax(int a, int b);
+
 std::string to_str(const Polynomial& v);
 
 Polynomial derivate(const Polynomial& polinomial);

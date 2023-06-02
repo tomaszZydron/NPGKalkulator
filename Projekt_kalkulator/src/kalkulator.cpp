@@ -68,6 +68,12 @@ std::size_t size_t_max(std::size_t a, std::size_t b)
     return b;
 }
 
+int intmax(int a, int b)
+{
+    if(a>b) return a;
+    return b;
+}
+
 //suma wielomianów
 Polynomial add_polynomials(const Polynomial& p1, const Polynomial& p2)
 {
