@@ -90,7 +90,11 @@ Matrix transpose_matrix(const Matrix& m);
 //mnożenie macierzy przez skalar
 Matrix multiply_matrix(const Matrix& m, int scalar);
 
+//mnożenie dwóch macierzy
 Matrix multiply_matrices(const Matrix& m1, const Matrix& m2 );
+
+//liczenie wyznacznika macierzy
+float determinant_matrix(const Matrix& m);
 
 //klasa odpowiadająca za wielomiany
 class Polynomial{

@@ -109,14 +109,43 @@ Matrix multiply_matrices(const Matrix& m1, const Matrix& m2 ){
     return result;
 }
 
+//
+int **submatrix(int **matrix, int n, int x, int y) {
+    int **submatrix = new int *[n - 1];
+    int subi = 0;
+    for (int i = 0; i < n; i++) {
+        submatrix[subi] = new int[n - 1];
+        int subj = 0;
+        if (i == y) {
+            continue;
+        }
+        for (int j = 0; j < n; j++) {
+            if (j == x) {
+                continue;
+            }
+            submatrix[subi][subj] = matrix[i][j];
+            subj++;
+        }
+        subi++;
+    }
+    return submatrix;
+}
+
 //liczenie wyznacznika macierzy
 float determinant_matrix(const Matrix& m){
-    float deter = 0;
+    float det = 0;
     if (m.size() == 1) {
         //wyznacznik macierzy jednoelementowej to ten element
-        deter = m[0][0];
+        det = m[0][0];
     }
-    return deter;
+    else if (m.size() == 2) {
+        //dla macierzy 2x2 metoda "na cebulkę"
+        det = m[0][0] * m[1][1] - m[0][1] * m[1][0];
+    }
+    /*else {
+        dla większych trzeba skorzystać z rozwinięcia Laplace'a
+    }*/
+    return det;
 }
 
 //funkcja zwracająca większą liczbę
