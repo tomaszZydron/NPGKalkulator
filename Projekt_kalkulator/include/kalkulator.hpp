@@ -74,5 +74,11 @@ Polynomial derivate(const Polynomial& polinomial);
 
 Polynomial integral(const Polynomial& polinomial);
 
+//klasa liczb zespolonych
+class Complex{
+public:
+    double Re, Im;
+};
+
 
 #endif //PROJEKT_KALKULATOR_KALKULATOR_HPP
