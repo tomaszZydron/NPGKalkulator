@@ -5,6 +5,7 @@
 #include <vector>
 #include <cstddef>
 #include <string>
+#include <stdexcept>
 
 //klasa odpowiadająca za wektory
 class Vect {
@@ -84,5 +85,7 @@ float pow(float a, int power);
 float value(const Polynomial& polynomial, float val);
 
 Polynomial multiplicate_polynomial(const Polynomial& p, float a);
+
+float sqr(float a, int n, int accuracy);
 
 #endif //PROJEKT_KALKULATOR_KALKULATOR_HPP

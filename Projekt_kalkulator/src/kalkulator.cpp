@@ -166,4 +166,16 @@ Polynomial multiplicate_polynomial(const Polynomial& p, float a)
     for(int i = 0; i < p.get_size(); i++) result[i] *= a;
     return result;
 }
+//znajdowanie pierwiastków
+float sqr(float a, int n, int accuracy)
+{
+    if(a < 0 && n % 2 == 0)
+    {
+        std::cout<<"Error. Trying to calculate even root of negative number.";
+        throw std::invalid_argument("Error. Trying to calculate even root of negative number.");
+    }
 
+    Polynomial pom = Polynomial(n+1);
+    pom[0] = a;
+    pom[n] = 1;
+}
