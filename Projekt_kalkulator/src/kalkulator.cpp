@@ -65,6 +65,7 @@ std::string vector_to_string(const Vect& v){
 Matrix::Matrix(const std::vector<std::vector<int>>& m) {
     std::copy(m.begin(), m.end(), std::back_inserter(matrix_));
 }
+
 //dodawanie macierzy
 Matrix add_matrices(const Matrix& m1, const Matrix& m2){
     Matrix matrices_sum(m1);
@@ -107,6 +108,13 @@ Matrix multiply_matrices(const Matrix& m1, const Matrix& m2 ){
         }
     }
     return result;
+}
+
+//dodawanie wiersza razy skalar
+void add_row(Matrix& m, int row_1, int row_2, int c){
+    for(size_t i = 0; i < m[0].size(); i++){
+        m[row_1][i] = c * m[row_2][i];
+    }
 }
 
 //
