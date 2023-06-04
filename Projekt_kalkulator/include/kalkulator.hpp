@@ -86,6 +86,6 @@ float value(const Polynomial& polynomial, float val);
 
 Polynomial multiplicate_polynomial(const Polynomial& p, float a);
 
-float sqr(float a, int n, int accuracy);
+float sqr(float a, int n = 2, int accuracy = 100000);
 
 #endif //PROJEKT_KALKULATOR_KALKULATOR_HPP

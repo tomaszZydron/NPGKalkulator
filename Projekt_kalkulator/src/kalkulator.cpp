@@ -167,15 +167,22 @@ Polynomial multiplicate_polynomial(const Polynomial& p, float a)
     return result;
 }
 //znajdowanie pierwiastków
-float sqr(float a, int n, int accuracy)
-{
-    if(a < 0 && n % 2 == 0)
-    {
-        std::cout<<"Error. Trying to calculate even root of negative number.";
+float sqr(float a, int n, int accuracy) {
+    if (a < 0 && n % 2 == 0) {
         throw std::invalid_argument("Error. Trying to calculate even root of negative number.");
     }
 
-    Polynomial pom = Polynomial(n+1);
-    pom[0] = a;
+    Polynomial pom = Polynomial(n + 1);
+    pom[0] = -a;
     pom[n] = 1;
+    float answer = 1;
+    if (pow(answer, n) == a) return answer;
+    Polynomial der = derivate(pom);
+    Polynomial line = Polynomial(2);
+    for (int i = 0; i < accuracy; i++) {
+        line[1] = value(der, answer);
+        line[0] = value(pom, answer) - line[1] * answer;
+        answer = -line[0] / line[1];
+    }
+    return answer;
 }
