@@ -109,6 +109,12 @@ Matrix multiply_matrices(const Matrix& m1, const Matrix& m2 ){
     }
     return result;
 }
+//mnożenie wiersza przez skalar
+void multiply_row(Matrix& m, int row, int c){
+    for(size_t i = 0; i < m[row].size(); i++){
+        m[row][i] = c * m[row][i];
+    }
+}
 
 //dodawanie wiersza razy skalar
 void add_row(Matrix& m, int row_1, int row_2, int c){

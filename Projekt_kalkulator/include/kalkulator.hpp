@@ -93,8 +93,11 @@ Matrix multiply_matrix(const Matrix& m, int scalar);
 //mnożenie dwóch macierzy
 Matrix multiply_matrices(const Matrix& m1, const Matrix& m2 );
 
-//dodawanie wiersza razy skalar
-void add_row(Matrix& mat, int row_1, int row_2, int c);
+//mnożenie wiersza przez skalar
+void multiply_row(Matrix& m, int c);
+
+//dodawanie wiersza przez skalar
+void add_row(Matrix& m, int row_1, int row_2, int c);
 
 //liczenie wyznacznika macierzy
 float determinant_matrix(const Matrix& m);
