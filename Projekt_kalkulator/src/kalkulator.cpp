@@ -115,3 +115,24 @@ Polynomial integral(const Polynomial& polinomial)
     }
     return integral_pol;
 }
+
+Complex ComplexAdd(Complex z1, Complex z2){
+    Complex z3;
+    z3.Re = z1.Re + z2.Re;
+    z3.Im = z1.Im + z2.Im;
+    return z3;
+}
+
+Complex ComplexSubtraction(Complex z1, Complex z2){
+    Complex z3;
+    z3.Re = z1.Re - z2.Re;
+    z3.Im = z1.Im - z2.Im;
+    return z3;
+}
+
+Complex ComplexMultiply(Complex z1, Complex z2){
+    Complex z3;
+    z3.Re = z1.Re * z2.Re - z1.Im * z2.Im;
+    z3.Im = z1.Re * z2.Im + z1.Im * z2.Re;
+    return z3;
+}

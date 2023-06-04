@@ -78,7 +78,17 @@ Polynomial integral(const Polynomial& polinomial);
 class Complex{
 public:
     double Re, Im;
+    //dodać konstruktory itp.
 };
+
+//dodawanie zespolonych
+Complex ComplexAdd(Complex c1, Complex c2);
+
+//odejmowanie zespolonych
+Complex ComplexSubtraction(Complex c1, Complex c2);
+
+//mnożenie zespolonych
+Complex ComplexMultiply(Complex c1, Complex c2);
 
 
 #endif //PROJEKT_KALKULATOR_KALKULATOR_HPP
