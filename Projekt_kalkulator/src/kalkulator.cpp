@@ -40,15 +40,22 @@ Vect multiply_vector(const Vect& v, int scalar){
     return multiplied_vect;
 }
 
+//zależność dwóch wektorów
 bool two_vector_dependance(const Vect& v1, const Vect& v2){
-    //brak wersji dla wartości 0 -- poprawić
+
     for(size_t i =0; i < v1.size() - 1; i++){
-        if(v1[i]/v2[i] != v1[i+1]/v2[i+1])
-            return 0;
+        if(v1[i]/v2[i] != v1[i+1]/v2[i+1]) {
+            return false;
         }
-    return 1;
+        else if((v2[i] == 0 and v1[i] != 0) or (v2[i+1] == 0 and v1[i+1] != 0)){
+            return false;
+        }
+        }
+
+    return true;
 }
 
+//wektor na string
 std::string vector_to_string(const Vect& v){
     std::ostringstream to_string;
     to_string << "[";
@@ -121,6 +128,14 @@ void add_row(Matrix& m, int row_1, int row_2, int c){
     for(size_t i = 0; i < m[0].size(); i++){
         m[row_1][i] = c * m[row_2][i];
     }
+}
+
+//zamiana wierszy
+void swap_rows(Matrix& m, int row_1, int row_2){
+     Vect swap(m[row_1].size());
+     swap = m[row_1];
+     m[row_1] = m[row_2];
+     m[row_2] = swap;
 }
 
 //

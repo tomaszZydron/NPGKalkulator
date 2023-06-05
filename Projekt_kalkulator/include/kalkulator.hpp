@@ -96,8 +96,11 @@ Matrix multiply_matrices(const Matrix& m1, const Matrix& m2 );
 //mnożenie wiersza przez skalar
 void multiply_row(Matrix& m, int c);
 
-//dodawanie wiersza przez skalar
+//dodawanie wiersza razy skalar
 void add_row(Matrix& m, int row_1, int row_2, int c);
+
+//zamiana wierszy
+void swap_rows(Matrix& m, int row_1, int row_2);
 
 //liczenie wyznacznika macierzy
 float determinant_matrix(const Matrix& m);
