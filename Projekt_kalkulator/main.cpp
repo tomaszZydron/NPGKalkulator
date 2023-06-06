@@ -1,11 +1,12 @@
 #include <iostream>
 #include <vector>
+#include <sstream>
 
 
 int type_size_vec(){
     int size = 0;
     while (size <= 1){
-        std::cout << "Podaj rozmiar wketora: ";
+        std::cout << "Podaj rozmiar wkektora: ";
         std::cin >> size;
     }
     return size;
@@ -16,21 +17,22 @@ std::vector<int> type_vec(int size ){
     std::cout << "wpisz wektor: \n";
     int x;
     for (int i = 0; i < size; i++){
-        std::cout << "Wypisz " << i+1 << " wartość: ";
+        std::cout << "Wypisz " << i+1 << " wartosc: ";
         std::cin>>x;
         v.push_back(x);
     }
     return v;
 }
+
 std::vector<int> type_size_matrix(){
     int rows = 0;
     while (rows <= 1){
-        std::cout << "Podaj ilość wierszy macierzy: ";
+        std::cout << "Podaj ilosc wierszy macierzy: ";
         std::cin >> rows;
     }
     int cols = 0;
     while (cols <= 1){
-        std::cout << "Podaj ilość kolumn macierzy: ";
+        std::cout << "Podaj ilosc kolumn macierzy: ";
         std::cin >> cols;
     }
     std::vector<int>size;
@@ -38,6 +40,7 @@ std::vector<int> type_size_matrix(){
     size.push_back(rows);
     return size;
 }
+
 std::vector<std::vector<int>> type_matrix(int rows, int cols){
     std::vector<std::vector<int>> matrix;
     int value = 0;
@@ -45,7 +48,7 @@ std::vector<std::vector<int>> type_matrix(int rows, int cols){
         std::vector<int> column;
         std::cout << "Wypisz " << x+1 << " kolumne \n";
         for(int y = 0; y <rows ; y++){
-            std::cout << "Wypisz " << y+1 << " wartość: ";
+            std::cout << "Wypisz " << y+1 << " wartosc: ";
             std::cin >> value;
             column.push_back(value);
         }
@@ -54,13 +57,25 @@ std::vector<std::vector<int>> type_matrix(int rows, int cols){
     return matrix;
 }
 
+void print_matrix(int rows, int cols, std::vector<std::vector<int>> matrix) {
+    std::stringstream ss;
+    for (int x = 0; x < rows; x++){
+        for(int y = 0; y < cols ; y++ ){
+            ss <<matrix[x][y]<<" ";
+        }
+        ss << '\n';
+    }
+    std::cout << ss.str();
+}
+
+
 int main() {
-    std::cout << "Witaj użytkowniku w kalkulatorze matematycznym  :P ";
-    std::cout << "Wybierz na czym chcesz wykonać operacje \n 1 - wektory \n 2 - macierze \n 3 - wielomiany";
+    std::cout << "Witaj uzytkowniku w kalkulatorze matematycznym  :P ";
+    std::cout << "Wybierz na czym chcesz wykonać operacje \n 1 - wektory \n 2 - macierze \n 3 - wielomiany  \n";
     int odp;
     std::cin >> odp;
     if (odp == 1) { //wektor
-        std::cout<< "Wybierz operacje jaka chcesz wykonać \n 1 -dodawanie \n 2 - iloczyn skalarny \n 3 - mnożenie przez skalar";
+        std::cout<< "Wybierz operacje jaka chcesz wykonać \n 1 -dodawanie \n 2 - iloczyn skalarny \n 3 - mnożenie przez skalar \n";
         std::cin >> odp;
         if (odp == 1){ //dodawanie
             int size = type_size_vec();
@@ -84,12 +99,14 @@ int main() {
         }
     }
     else if (odp == 2) { //macierze
-        std::cout<< "Wybierz operacje jaka chcesz wykonać \n 1 -dodawanie \n 2 - iloczyn";
+        std::cout<< "Wybierz operacje jaka chcesz wykonać \n 1 -dodawanie \n 2 - iloczyn \n";
         std::cin >> odp;
         if (odp == 1){ //dodawanie
             std::vector<int> size = type_size_matrix();
             std::vector<std::vector<int>>matrix1 = type_matrix(size[0],size[1]);
             std::vector<std::vector<int>>matrix2 = type_matrix(size[0],size[1]);
+
+            print_matrix(size[0],size[1],matrix1);
 
         }
         if (odp == 2){ //iloczyn
