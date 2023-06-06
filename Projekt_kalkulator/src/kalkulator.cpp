@@ -73,6 +73,23 @@ Matrix::Matrix(const std::vector<std::vector<int>>& m) {
     std::copy(m.begin(), m.end(), std::back_inserter(matrix_));
 }
 
+//matrix na stringa
+std::string matrix_to_string(const Matrix& m){
+    std::ostringstream to_string;
+
+    to_string << "[" << "\n";
+    for (auto i = m.cbegin(); i != m.cend(); ++i) {
+        to_string << " " << vector_to_string(*i);
+        if (i != m.cend() - 1){
+            to_string << ";";
+        }
+        to_string << "\n";
+    }
+    to_string << "]";
+
+    return to_string.str();
+}
+
 //dodawanie macierzy
 Matrix add_matrices(const Matrix& m1, const Matrix& m2){
     Matrix matrices_sum(m1);

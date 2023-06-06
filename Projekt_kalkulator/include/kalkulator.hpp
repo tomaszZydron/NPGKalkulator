@@ -81,6 +81,9 @@ private:
     std::vector<Vect> matrix_;
 };
 
+//matrix na stringa
+std::string matrix_to_string(const Matrix& m);
+
 //dodawanie macierzy
 Matrix add_matrices(const Matrix& m1, const Matrix& m2);
 
