@@ -52,6 +52,64 @@ bool two_vector_dependance(const Vect& v1, const Vect& v2);
 //wektor na stringa
 std::string vector_to_string(const Vect& v);
 
+
+//klasa odpowiadająca za macierze
+class Matrix {
+public:
+    //konstruktory
+    Matrix(std::size_t n_rows, std::size_t n_cols) :
+            matrix_(n_rows, Vect(n_cols)) {}
+
+    Matrix(const Matrix&) = default;
+
+    Matrix(const std::vector<std::vector<int>>& m);
+
+    std::size_t size() const { return matrix_.size(); }
+
+    //operatory
+    const Vect& operator[](std::size_t pos) const { return matrix_[pos]; }
+    Vect& operator[](std::size_t pos) { return matrix_[pos]; }
+
+    //iteratory
+    std::vector<Vect>::const_iterator cbegin() const { return matrix_.cbegin(); }
+    std::vector<Vect>::const_iterator cend() const { return matrix_.cend(); }
+    std::vector<Vect>::iterator begin() { return matrix_.begin(); }
+    std::vector<Vect>::const_iterator begin() const { return matrix_.cbegin(); }
+    std::vector<Vect>::iterator end() { return matrix_.end(); }
+    std::vector<Vect>::const_iterator end() const { return matrix_.cend(); }
+
+private:
+    std::vector<Vect> matrix_;
+};
+
+//matrix na stringa
+std::string matrix_to_string(const Matrix& m);
+
+//dodawanie macierzy
+Matrix add_matrices(const Matrix& m1, const Matrix& m2);
+
+//macierz transponowana
+Matrix transpose_matrix(const Matrix& m);
+
+//mnożenie macierzy przez skalar
+Matrix multiply_matrix(const Matrix& m, int scalar);
+
+//mnożenie dwóch macierzy
+Matrix multiply_matrices(const Matrix& m1, const Matrix& m2 );
+
+//mnożenie wiersza przez skalar
+void multiply_row(Matrix& m, int c);
+
+//dodawanie wiersza razy skalar
+void add_row(Matrix& m, int row_1, int row_2, int c);
+
+//zamiana wierszy
+void swap_rows(Matrix& m, int row_1, int row_2);
+
+//liczenie wyznacznika macierzy
+float determinant_matrix(const Matrix& m);
+
+
 //klasa odpowiadająca za wielomiany
 class Polynomial{
 public:

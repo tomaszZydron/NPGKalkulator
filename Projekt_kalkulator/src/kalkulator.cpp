@@ -55,7 +55,8 @@ bool two_vector_dependance(const Vect& v1, const Vect& v2){
     return true;
 }
 
-//wektor na stringa
+
+//wektor na string
 std::string vector_to_string(const Vect& v){
     std::ostringstream to_string;
     to_string << "[";
@@ -66,6 +67,132 @@ std::string vector_to_string(const Vect& v){
     }
     to_string << "]";
     return to_string.str();
+}
+
+//konstruktor kopiujący?
+Matrix::Matrix(const std::vector<std::vector<int>>& m) {
+    std::copy(m.begin(), m.end(), std::back_inserter(matrix_));
+}
+
+//matrix na stringa
+std::string matrix_to_string(const Matrix& m){
+    std::ostringstream to_string;
+
+    to_string << "[" << "\n";
+    for (auto i = m.cbegin(); i != m.cend(); ++i) {
+        to_string << " " << vector_to_string(*i);
+        if (i != m.cend() - 1){
+            to_string << ";";
+        }
+        to_string << "\n";
+    }
+    to_string << "]";
+
+    return to_string.str();
+}
+
+//dodawanie macierzy
+Matrix add_matrices(const Matrix& m1, const Matrix& m2){
+    Matrix matrices_sum(m1);
+    for(std::size_t i = 0; i < m1.size(); i++){
+        matrices_sum[i] = add_vectors(m1[i], m2[i]);
+    }
+    return matrices_sum;
+}
+
+//mnożenie macierzy przez skalar
+Matrix multiply_matrix(const Matrix& m, int scalar){
+    Matrix multiplied_matrix(m);
+    for(std::size_t i = 0; i < m.size(); i++){
+        multiplied_matrix[i] = multiply_vector(m[i], scalar);
+    }
+    return multiplied_matrix;
+}
+
+//macierz transponowana
+Matrix transpose_matrix(const Matrix& m){
+    std::size_t m_cols = m[0].size();
+    std::size_t m_rows = m.size();
+    Matrix transpose(m_cols, m_rows);
+    for (std::size_t i = 0; i < m_cols; i++){
+        for(std::size_t j = 0; j < m_cols; j++){
+            transpose[i][j] = m[j][i];
+        }
+    }
+    return transpose;
+}
+
+//mnożenie dwóch macierzy
+Matrix multiply_matrices(const Matrix& m1, const Matrix& m2 ){
+    transpose_matrix(m2);
+    std::size_t size = m1.size();
+    Matrix result(size, size);
+    for (std::size_t i = 0; i < size; i++){
+        for(std::size_t j = 0; j < size; j++){
+            result[i][j] = scalar_product(m1[i], m2[j]);
+        }
+    }
+    return result;
+}
+//mnożenie wiersza przez skalar
+void multiply_row(Matrix& m, int row, int c){
+
+    multiply_vector(m[row], c);
+
+}
+
+//dodawanie wiersza razy skalar
+void add_row(Matrix& m, int row_1, int row_2, int c){
+    for(size_t i = 0; i < m[0].size(); i++){
+        m[row_1][i] = c * m[row_2][i];
+    }
+}
+
+//zamiana wierszy
+void swap_rows(Matrix& m, int row_1, int row_2){
+     Vect swap(m[row_1].size());
+     swap = m[row_1];
+     m[row_1] = m[row_2];
+     m[row_2] = swap;
+}
+
+//
+int **submatrix(int **matrix, int n, int x, int y) {
+    int **submatrix = new int *[n - 1];
+    int subi = 0;
+    for (int i = 0; i < n; i++) {
+        submatrix[subi] = new int[n - 1];
+        int subj = 0;
+        if (i == y) {
+            continue;
+        }
+        for (int j = 0; j < n; j++) {
+            if (j == x) {
+                continue;
+            }
+            submatrix[subi][subj] = matrix[i][j];
+            subj++;
+        }
+        subi++;
+    }
+    return submatrix;
+}
+
+//liczenie wyznacznika macierzy
+float determinant_matrix(const Matrix& m){
+    float det = 0;
+    if (m.size() == 1) {
+        //wyznacznik macierzy jednoelementowej to ten element
+        det = m[0][0];
+    }
+    else if (m.size() == 2) {
+        //dla macierzy 2x2 metoda "na cebulkę"
+        det = m[0][0] * m[1][1] - m[0][1] * m[1][0];
+    }
+    /*else {
+        dla większych trzeba skorzystać z rozwinięcia Laplace'a
+    }*/
+    return det;
 }
 
 //funkcja zwracająca większą liczbę
