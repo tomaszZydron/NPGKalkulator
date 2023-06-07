@@ -23,8 +23,8 @@ Vect add_vectors(const Vect& v1, const Vect& v2) {
 }
 
 //iloczyn skalarny wektorów
-int scalar_product(const Vect& v1, const Vect& v2) {
-    int scalar = 0;
+double scalar_product(const Vect& v1, const Vect& v2) {
+    double scalar = 0;
     for(std::size_t i = 0; i < v1.size(); i++){
         scalar += v1[i] * v2[i];
     }
@@ -32,7 +32,7 @@ int scalar_product(const Vect& v1, const Vect& v2) {
 }
 
 //mnożenie wektora przez skalar
-Vect multiply_vector(const Vect& v, int scalar){
+Vect multiply_vector(const Vect& v, double scalar){
     Vect multiplied_vect(v.size());
     for(std::size_t i = 0; i < v.size(); i++) {
         multiplied_vect[i] = scalar * v[i];
@@ -51,7 +51,7 @@ bool two_vector_dependance(const Vect& v1, const Vect& v2){
         else if((v2[i] == 0 and v1[i] != 0) or (v2[i+1] == 0 and v1[i+1] != 0)){
             return false;
         }
-        }
+    }
     return true;
 }
 
@@ -70,7 +70,7 @@ std::string vector_to_string(const Vect& v){
 }
 
 //konstruktor kopiujący?
-Matrix::Matrix(const std::vector<std::vector<int>>& m) {
+Matrix::Matrix(const std::vector<std::vector<double>>& m) {
     std::copy(m.begin(), m.end(), std::back_inserter(matrix_));
 }
 
@@ -101,7 +101,7 @@ Matrix add_matrices(const Matrix& m1, const Matrix& m2){
 }
 
 //mnożenie macierzy przez skalar
-Matrix multiply_matrix(const Matrix& m, int scalar){
+Matrix multiply_matrix(const Matrix& m, double scalar){
     Matrix multiplied_matrix(m);
     for(std::size_t i = 0; i < m.size(); i++){
         multiplied_matrix[i] = multiply_vector(m[i], scalar);
@@ -135,14 +135,14 @@ Matrix multiply_matrices(const Matrix& m1, const Matrix& m2 ){
     return result;
 }
 //mnożenie wiersza przez skalar
-void multiply_row(Matrix& m, int row, int c){
+void multiply_row(Matrix& m, int row, double c){
 
     multiply_vector(m[row], c);
 
 }
 
 //dodawanie wiersza razy skalar
-void add_row(Matrix& m, int row_1, int row_2, int c){
+void add_row(Matrix& m, int row_1, int row_2, double c){
     for(size_t i = 0; i < m[0].size(); i++){
         m[row_1][i] = c * m[row_2][i];
     }

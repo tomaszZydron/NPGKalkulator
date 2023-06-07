@@ -10,22 +10,22 @@
 class Vect {
 public:
     //konstruktory
-    Vect(std::size_t n) : v_(n, 0) {}
-    Vect(const std::vector<int>& v) : v_(v) {}
+    Vect(std::size_t n) : v_(n, 0.0) {}
+    Vect(const std::vector<double>& v) : v_(v) {}
 
     //operatory
-    const int& operator[](std::size_t position) const {return v_[position];}
-    int& operator[](std::size_t position) {return v_[position];}
+    const double& operator[](std::size_t position) const {return v_[position];}
+    double& operator[](std::size_t position) {return v_[position];}
 
     //iteratory
-    std::vector<int>::const_iterator cbegin() const {return v_.cbegin(); }
-    std::vector<int>::const_iterator cend() const {return v_.cend(); }
+    std::vector<double>::const_iterator cbegin() const {return v_.cbegin(); }
+    std::vector<double>::const_iterator cend() const {return v_.cend(); }
 
-    std::vector<int>::iterator begin() {return v_.begin(); }
-    std::vector<int>::iterator end() {return v_.end(); }
+    std::vector<double>::iterator begin() {return v_.begin(); }
+    std::vector<double>::iterator end() {return v_.end(); }
 
-    std::vector<int>::const_iterator begin() const {return v_.cbegin(); }
-    std::vector<int>::const_iterator end() const {return v_.cend(); }
+    std::vector<double>::const_iterator begin() const {return v_.cbegin(); }
+    std::vector<double>::const_iterator end() const {return v_.cend(); }
 
     //metoda zwracająca rozmiar wektora
     std::size_t size() const { return v_.size(); }
@@ -34,17 +34,17 @@ public:
     double norm() const;
 
 private:
-    std::vector<int> v_;
+    std::vector<double> v_;
 };
 
 //dodawanie wektorów
 Vect add_vectors(const Vect& v1, const Vect& v2);
 
 //iloczyn skalarny wektorów
-int scalar_product(const Vect& v1, const Vect& v2);
+double scalar_product(const Vect& v1, const Vect& v2);
 
 //mnożenie wektora przez skalar
-Vect multiply_vector(const Vect& v, int scalar);
+Vect multiply_vector(const Vect& v, double scalar);
 
 //czy dwa wektory są zależne
 bool two_vector_dependance(const Vect& v1, const Vect& v2);
@@ -62,7 +62,7 @@ public:
 
     Matrix(const Matrix&) = default;
 
-    Matrix(const std::vector<std::vector<int>>& m);
+    Matrix(const std::vector<std::vector<double>>& m);
 
     std::size_t size() const { return matrix_.size(); }
 
@@ -92,16 +92,16 @@ Matrix add_matrices(const Matrix& m1, const Matrix& m2);
 Matrix transpose_matrix(const Matrix& m);
 
 //mnożenie macierzy przez skalar
-Matrix multiply_matrix(const Matrix& m, int scalar);
+Matrix multiply_matrix(const Matrix& m, double scalar);
 
 //mnożenie dwóch macierzy
 Matrix multiply_matrices(const Matrix& m1, const Matrix& m2 );
 
 //mnożenie wiersza przez skalar
-void multiply_row(Matrix& m, int c);
+void multiply_row(Matrix& m, double c);
 
 //dodawanie wiersza razy skalar
-void add_row(Matrix& m, int row_1, int row_2, int c);
+void add_row(Matrix& m, int row_1, int row_2, double c);
 
 //zamiana wierszy
 void swap_rows(Matrix& m, int row_1, int row_2);
