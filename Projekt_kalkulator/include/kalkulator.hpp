@@ -77,18 +77,20 @@ Polynomial integral(const Polynomial& polinomial);
 //klasa liczb zespolonych
 class Complex{
 public:
-    double Re, Im;
-    //dodać konstruktory itp.
+    double Re;
+    double Im;
 };
 
-//dodawanie zespolonych
+//dodawanie liczb zespolonych
 Complex ComplexAdd(Complex c1, Complex c2);
 
-//odejmowanie zespolonych
+//odejmowanie liczb zespolonych
 Complex ComplexSubtraction(Complex c1, Complex c2);
 
-//mnożenie zespolonych
+//mnożenie liczb zespolonych
 Complex ComplexMultiply(Complex c1, Complex c2);
 
+//Dzielenie liczb zespolonych
+Complex ComplexDevide(Complex z1, Complex z2);
 
 #endif //PROJEKT_KALKULATOR_KALKULATOR_HPP

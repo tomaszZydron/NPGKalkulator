@@ -116,23 +116,45 @@ Polynomial integral(const Polynomial& polinomial)
     return integral_pol;
 }
 
-Complex ComplexAdd(Complex z1, Complex z2){
+//Dodawanie liczb zespolonych
+Complex ComplexAdd(Complex z1, Complex z2) {
     Complex z3;
     z3.Re = z1.Re + z2.Re;
     z3.Im = z1.Im + z2.Im;
     return z3;
 }
 
-Complex ComplexSubtraction(Complex z1, Complex z2){
+//Odejmowanie liczb zespolonych
+Complex ComplexSubtraction(Complex z1, Complex z2) {
     Complex z3;
     z3.Re = z1.Re - z2.Re;
     z3.Im = z1.Im - z2.Im;
     return z3;
 }
 
-Complex ComplexMultiply(Complex z1, Complex z2){
+//Mnożenie liczb zespolonych
+Complex ComplexMultiply(Complex z1, Complex z2) {
     Complex z3;
     z3.Re = z1.Re * z2.Re - z1.Im * z2.Im;
     z3.Im = z1.Re * z2.Im + z1.Im * z2.Re;
     return z3;
+}
+
+//Dzielenie liczb zespolonych
+Complex ComplexDevide(Complex z1, Complex z2) {
+    Complex z3;
+    double w;
+    w = z2.Re * z2.Re + z2.Im * z2.Im;
+
+    if (w > 0) {
+        z3.Re = (z1.Re * z2.Re + z1.Im * z2.Im) / w;
+        z3.Im = (z2.Re * z1.Im - z1.Re * z2.Im) / w;
+        return z3;
+    }
+
+    else {
+        printf("FUNCTION C_DIV ERROR: Wystapil blad podczas dzielenia \n");
+        system("PAUSE");
+        exit(10);
+    }
 }
