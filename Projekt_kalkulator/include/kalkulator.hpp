@@ -62,14 +62,14 @@ public:
     ~Polynomial() = default;
     const float& operator[](std::size_t pos) const { return coeficient_[pos]; }
     float& operator[](std::size_t pos) { return coeficient_[pos]; }
-    std::vector<int>::const_iterator cbegin() const {return coeficient_.cbegin(); }
-    std::vector<int>::const_iterator cend() const {return coeficient_.cend(); }
+    std::vector<float>::const_iterator cbegin() const {return coeficient_.cbegin(); }
+    std::vector<float>::const_iterator cend() const {return coeficient_.cend(); }
 
-    std::vector<int>::iterator begin() {return coeficient_.begin(); }
-    std::vector<int>::iterator end() {return coeficient_.end(); }
+    std::vector<float>::iterator begin() {return coeficient_.begin(); }
+    std::vector<float>::iterator end() {return coeficient_.end(); }
 
-    std::vector<int>::const_iterator begin() const {return coeficient_.cbegin(); }
-    std::vector<int>::const_iterator end() const {return coeficient_.cend(); }
+    std::vector<float>::const_iterator begin() const {return coeficient_.cbegin(); }
+    std::vector<float>::const_iterator end() const {return coeficient_.cend(); }
 
 private:
     std::vector<float> coeficient_;
@@ -96,5 +96,7 @@ float value(const Polynomial& polynomial, float val);
 Polynomial multiplicate_polynomial(const Polynomial& p, float a);
 
 float sqr(float a, int n = 2, int accuracy = 100000);
+
+std::vector<Polynomial> divide(const Polynomial& p, float x);
 
 #endif //PROJEKT_KALKULATOR_KALKULATOR_HPP

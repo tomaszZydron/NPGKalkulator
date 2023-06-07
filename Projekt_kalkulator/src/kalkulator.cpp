@@ -186,3 +186,15 @@ float sqr(float a, int n, int accuracy) {
     }
     return answer;
 }
+std::vector<Polynomial> divide(const Polynomial& p, float x)
+{
+    std::vector<Polynomial> v;
+    float rest = 0;
+    Polynomial pom = Polynomial(p.get_size() - 1);
+    pom[0] = p[0];
+    for(int i = 1; i < int(p.get_size() - 1); i++)
+    {
+        pom[i] = pom[i - 1] * x + p[i];
+    }
+
+}
