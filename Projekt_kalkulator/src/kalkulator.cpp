@@ -186,15 +186,18 @@ float sqr(float a, int n, int accuracy) {
     }
     return answer;
 }
-std::vector<Polynomial> divide(const Polynomial& p, float x)
+std::tuple<Polynomial, float> divide(const Polynomial& p, float x)
 {
     std::vector<Polynomial> v;
     float rest = 0;
     Polynomial pom = Polynomial(p.get_size() - 1);
-    pom[0] = p[0];
-    for(int i = 1; i < int(p.get_size() - 1); i++)
+    pom[p.get_size() - 2] = p[p.get_size() - 1];
+    for(int i = int(p.get_size()) - 3; i >= 0; i--)
     {
-        pom[i] = pom[i - 1] * x + p[i];
+        pom[i] = pom[i + 1] * x + p[i + 1];
     }
+    rest = pom[0] * x + p[0];
+    return std::make_tuple(pom, rest);
+
 
 }

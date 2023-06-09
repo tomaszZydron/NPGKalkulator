@@ -6,6 +6,7 @@
 #include <cstddef>
 #include <string>
 #include <stdexcept>
+#include <tuple>
 
 //klasa odpowiadająca za wektory
 class Vect {
@@ -97,6 +98,6 @@ Polynomial multiplicate_polynomial(const Polynomial& p, float a);
 
 float sqr(float a, int n = 2, int accuracy = 100000);
 
-std::vector<Polynomial> divide(const Polynomial& p, float x);
+std::tuple<Polynomial, float> divide(const Polynomial& p, float x);
 
 #endif //PROJEKT_KALKULATOR_KALKULATOR_HPP
