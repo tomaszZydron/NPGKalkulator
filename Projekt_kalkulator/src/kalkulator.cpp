@@ -209,8 +209,10 @@ int **submatrix(int **matrix, int n, int x, int y) {
 }
 
 //liczenie wyznacznika macierzy
-float determinant_matrix(const Matrix& m){
-    float det = 0;
+double matrix_determinant(Matrix& m){
+    double det = 1;
+//brak sprawdzenia czy wymiary są równe!!!
+
     if (m.size() == 1) {
         //wyznacznik macierzy jednoelementowej to ten element
         det = m[0][0];
@@ -219,9 +221,13 @@ float determinant_matrix(const Matrix& m){
         //dla macierzy 2x2 metoda "na cebulkę"
         det = m[0][0] * m[1][1] - m[0][1] * m[1][0];
     }
-    /*else {
-        dla większych trzeba skorzystać z rozwinięcia Laplace'a
-    }*/
+    else {
+        echelon_form(m);
+        for(size_t i = 0; i < m.size(); i++){
+            det *= m[i][i];
+        }
+
+    }
     return det;
 }
 
