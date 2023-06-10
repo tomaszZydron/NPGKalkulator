@@ -100,4 +100,6 @@ float sqr(float a, int n = 2, int accuracy = 100000);
 
 std::tuple<Polynomial, float> divide(const Polynomial& p, float x);
 
+int sn(int n, int k);
+
 #endif //PROJEKT_KALKULATOR_KALKULATOR_HPP

@@ -201,3 +201,11 @@ std::tuple<Polynomial, float> divide(const Polynomial& p, float x)
 
 
 }
+
+int sn(int n, int k)
+{
+    if(k == 0 || n == 0) return 1;
+    if(n < k || n < 0) return 0;
+    return sn(n - 1, k-1) + sn(n-1, k);
+
+}
