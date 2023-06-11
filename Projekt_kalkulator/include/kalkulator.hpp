@@ -93,4 +93,7 @@ Complex ComplexMultiply(Complex c1, Complex c2);
 //Dzielenie liczb zespolonych
 Complex ComplexDevide(Complex z1, Complex z2);
 
+//Liczba zespolona na stringa
+std::string complex_to_string(Complex z);
+
 #endif //PROJEKT_KALKULATOR_KALKULATOR_HPP

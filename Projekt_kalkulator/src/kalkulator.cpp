@@ -158,3 +158,13 @@ Complex ComplexDevide(Complex z1, Complex z2) {
         exit(10);
     }
 }
+
+//Liczba zespolona na stringa
+std::string complex_to_string(Complex z){
+    std::ostringstream to_string;
+    to_string << z.Re;
+    to_string << " + ";
+    to_string << z.Im;
+    to_string << "i";
+    return to_string.str();
+}
