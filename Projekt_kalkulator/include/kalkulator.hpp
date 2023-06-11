@@ -106,8 +106,11 @@ void add_row(Matrix& m, int row_1, int row_2, double c);
 //zamiana wierszy
 void swap_rows(Matrix& m, int row_1, int row_2);
 
+//postać schodkowa macierzy
+void echelon_form(Matrix& m);
+
 //liczenie wyznacznika macierzy
-float determinant_matrix(const Matrix& m);
+double matrix_determinant(const Matrix& m);
 
 
 //klasa odpowiadająca za wielomiany
