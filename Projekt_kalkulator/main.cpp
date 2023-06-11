@@ -68,6 +68,26 @@ void print_matrix(int rows, int cols, std::vector<std::vector<int>> matrix) {
     std::cout << ss.str();
 }
 
+int type_size_polynomial(){
+    int size = 0;
+    while (size <= 1){
+        std::cout << "Podaj stopień wielomianu: ";
+        std::cin >> size;
+    }
+    return size;
+}
+
+float type_polynomial(int size){
+    std::stringstream ss;
+    int a = 0;
+    for (int i = size; i > 0; i--){
+        std::cout << "podaj wartość przy x^"<<size<<": ";
+        std::cin >> a;
+        ss<<a<<"*x^"<<i<<" + ";
+    }
+    float polynomial = ss.get();
+    return polynomial;
+}
 
 int main() {
     std::cout << "Witaj uzytkowniku w kalkulatorze matematycznym  :P ";
