@@ -159,7 +159,7 @@ Complex ComplexDevide(Complex z1, Complex z2) {
     }
 }
 
-//Liczba zespolona na stringa
+//Liczba zespolona na stringa (postać kanoniczna)
 std::string complex_to_string(Complex z) {
     std::ostringstream to_string;
     if (z.Re != 0) {
@@ -171,4 +171,36 @@ std::string complex_to_string(Complex z) {
         to_string << "i";
     }
     return to_string.str();
+}
+
+//Postać trygonometryczna liczby zespolonej jako string
+std::string complex_trig_string(Complex z) {
+    std::ostringstream trig_string;
+
+    double phi; //kąt skierowany
+    double r; //moduł liczby zespolonej
+
+    r = sqrt(z.Re * z.Re + z.Im * z.Im);
+
+    if (r == 0) {
+        trig_string << 0;
+    }
+
+    else {
+        if (z.Im >= 0 && r != 0) {
+            phi = acos(z.Re / r);
+        }
+        if (z.Im < 0) {
+            phi = -acos(z.Re / r);
+        }
+
+        trig_string << r;
+        trig_string << "( cos(";
+        trig_string << phi;
+        trig_string << ") + i sin(";
+        trig_string << phi;
+        trig_string << ") )";
+    }
+
+    return trig_string.str();
 }
