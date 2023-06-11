@@ -187,10 +187,10 @@ std::string complex_trig_string(Complex z) {
     }
 
     else {
-        if (z.Im >= 0 && r != 0) {
+        if (z.Im >= 0) {
             phi = acos(z.Re / r);
         }
-        if (z.Im < 0) {
+        else {
             phi = -acos(z.Re / r);
         }
 
@@ -203,4 +203,34 @@ std::string complex_trig_string(Complex z) {
     }
 
     return trig_string.str();
+}
+
+//Postać wykładnicza liczby zespolonej jako string
+std::string complex_euler_string(Complex z) {
+    std::ostringstream euler_string;
+
+    double phi; //kąt skierowany
+    double r; //moduł liczby zespolonej
+
+    r = sqrt(z.Re * z.Re + z.Im * z.Im);
+
+    if (r == 0) {
+        euler_string << 0;
+    }
+
+    else {
+        if (z.Im >= 0) {
+            phi = acos(z.Re / r);
+        }
+        else {
+            phi = -acos(z.Re / r);
+        }
+
+        euler_string << r;
+        euler_string << " exp(i ";
+        euler_string << phi;
+        euler_string << ")";
+    }
+
+    return euler_string.str();
 }
