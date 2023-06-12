@@ -61,8 +61,9 @@ std::string vector_to_string(const Vect& v){
     std::ostringstream to_string;
     to_string << "[";
     for(auto i = v.cbegin(); i != v.cend(); ++i){
+        to_string << *i;
         if(i != v.cend() - 1) {
-            to_string << *i << "; ";
+            to_string << ", ";
         }
     }
     to_string << "]";
