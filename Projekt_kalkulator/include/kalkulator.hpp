@@ -93,7 +93,13 @@ Complex ComplexMultiply(Complex c1, Complex c2);
 //Dzielenie liczb zespolonych
 Complex ComplexDevide(Complex z1, Complex z2);
 
-//Liczba zespolona na stringa
+//Liczba zespolona na stringa (postać kanoniczna)
 std::string complex_to_string(Complex z);
+
+//Postać trygonometryczna liczby zespolonej jako string
+std::string complex_trig_string(Complex z);
+
+//Postać wykładnicza liczby zespolonej jako string
+std::string complex_euler_string(Complex z);
 
 #endif //PROJEKT_KALKULATOR_KALKULATOR_HPP
