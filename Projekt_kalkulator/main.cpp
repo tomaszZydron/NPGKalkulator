@@ -124,7 +124,7 @@ int main() {
         if (odp == 1){ //dodawanie
             std::vector<int> size = type_size_matrix();
             std::vector<std::vector<int>>matrix1 = type_matrix(size[0],size[1]);
-            std::vector<std::vector<int>>matrix2 = type_matrix(size[0],size[1]);
+            //std::vector<std::vector<int>>matrix2 = type_matrix(size[0],size[1]);
 
             print_matrix(size[0],size[1],matrix1);
 
