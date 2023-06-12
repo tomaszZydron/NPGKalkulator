@@ -102,4 +102,30 @@ std::tuple<Polynomial, float> divide(const Polynomial& p, float x);
 
 int sn(int n, int k);
 
+class Point
+{
+    public:
+        Point(float x, float y) : x_(x), y_(y) {}
+        float get_x() const {return x_;}
+        float get_y() const {return y_;}
+        ~Point() = default;
+        void move(float dx, float dy) {x_ += dx; y_ += dy;}
+    private:
+        float x_;
+        float y_;
+};
+
+class Line
+{
+    public:
+        Line(float a, float b) : a_(a), b_(b) {}
+        float get_a() const {return a_;}
+        float get_b() const {return b_;}
+    private:
+        float a_;
+        float b_;
+};
+
+
+
 #endif //PROJEKT_KALKULATOR_KALKULATOR_HPP
