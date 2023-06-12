@@ -1,23 +1,24 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
-
+#include "kalkulator.hpp"
 
 int type_size_vec(){
     int size = 0;
-    while (size <= 1){
-        std::cout << "Podaj rozmiar wkektora: ";
+    while (size < 1){
+        std::cout << "Podaj rozmiar wektora: ";
         std::cin >> size;
     }
     return size;
 }
 
+//zmienić typ
 std::vector<int> type_vec(int size ){
     std::vector < int > v;
     std::cout << "wpisz wektor: \n";
     int x;
     for (int i = 0; i < size; i++){
-        std::cout << "Wypisz " << i+1 << " wartosc: ";
+        std::cout << "Wpisz " << i+1 << " wartosc: ";
         std::cin>>x;
         v.push_back(x);
     }
@@ -71,7 +72,7 @@ void print_matrix(int rows, int cols, std::vector<std::vector<int>> matrix) {
 int type_size_polynomial(){
     int size = 0;
     while (size <= 1){
-        std::cout << "Podaj stopień wielomianu: ";
+        std::cout << "Podaj stopien wielomianu: ";
         std::cin >> size;
     }
     return size;
@@ -81,7 +82,7 @@ float type_polynomial(int size){
     std::stringstream ss;
     int a = 0;
     for (int i = size; i > 0; i--){
-        std::cout << "podaj wartość przy x^"<<size<<": ";
+        std::cout << "podaj wartosc przy x^"<<size<<": ";
         std::cin >> a;
         ss<<a<<"*x^"<<i<<" + ";
     }
@@ -95,19 +96,19 @@ int main() {
     int odp;
     std::cin >> odp;
     if (odp == 1) { //wektor
-        std::cout<< "Wybierz operacje jaka chcesz wykonać \n 1 -dodawanie \n 2 - iloczyn skalarny \n 3 - mnożenie przez skalar \n";
+        std::cout<< "Wybierz operacje jaka chcesz wykonac \n 1 -dodawanie \n 2 - iloczyn skalarny \n 3 - mnozenie przez skalar \n";
         std::cin >> odp;
         if (odp == 1){ //dodawanie
             int size = type_size_vec();
             std::vector<int>v1 = type_vec(size);
             std::vector<int>v2 = type_vec(size);
-            std::cout << "Suma wektorów to: " ;
+            std::cout << "Suma wektorow to: " ;
         }
         if (odp == 2){ // iloczyn skalarny
             int size = type_size_vec();
             std::vector<int>v1 = type_vec(size);
             std::vector<int>v2 = type_vec(size);
-            std:std::cout << "Iloczyn skalarny wektorów to: " ;
+            std::cout << "Iloczyn skalarny wektorow to: " ;
         }
         if (odp == 3){ // mnożenie przez skalar
             int size = type_size_vec();

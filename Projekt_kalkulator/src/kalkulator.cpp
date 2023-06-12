@@ -156,6 +156,36 @@ void swap_rows(Matrix& m, int row_1, int row_2){
      m[row_2] = swap;
 }
 
+//postać schodkowa macierzy
+void echelon_form(Matrix& m){
+    int m_rows = m.size();
+    int m_cols = m[0].size();
+
+    int r = 0;
+    int c = 0;
+    while(r < m_rows and c < m_cols){
+        int i =0;
+        while(i + r < m_rows and m[i+r][c] == 0){
+            i++;
+        }
+        if(i + r == m_rows){
+            c += 1;
+        }
+        else {
+            if(i != 0){
+                swap_rows(m, r, r + i);
+            }
+            for(int j = 1; r + j < m_rows; j++){
+                if(m[r + j][c] != 0){
+                    add_row(m, r + j, r, -m[r + j][c]/m[r][c]);
+                }
+            }
+            r += 1;
+            c += 1;
+        }
+    }
+}
+
 //
 int **submatrix(int **matrix, int n, int x, int y) {
     int **submatrix = new int *[n - 1];
@@ -179,8 +209,10 @@ int **submatrix(int **matrix, int n, int x, int y) {
 }
 
 //liczenie wyznacznika macierzy
-float determinant_matrix(const Matrix& m){
-    float det = 0;
+double matrix_determinant(Matrix& m){
+    double det = 1;
+//brak sprawdzenia czy wymiary są równe!!!
+
     if (m.size() == 1) {
         //wyznacznik macierzy jednoelementowej to ten element
         det = m[0][0];
@@ -189,9 +221,13 @@ float determinant_matrix(const Matrix& m){
         //dla macierzy 2x2 metoda "na cebulkę"
         det = m[0][0] * m[1][1] - m[0][1] * m[1][0];
     }
-    /*else {
-        dla większych trzeba skorzystać z rozwinięcia Laplace'a
-    }*/
+    else {
+        echelon_form(m);
+        for(size_t i = 0; i < m.size(); i++){
+            det *= m[i][i];
+        }
+
+    }
     return det;
 }
 
