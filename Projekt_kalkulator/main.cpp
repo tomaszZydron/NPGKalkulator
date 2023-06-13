@@ -12,11 +12,11 @@ int type_size_vec(){
     return size;
 }
 
-//zmienić typ
+
 std::vector<double> type_vec(int size ){
     std::vector <double> v;
     std::cout << "Wpisz wektor: \n";
-    int x;
+    double x;
     for (int i = 0; i < size; i++){
         std::cout << "Wpisz " << i+1 << " wartosc: ";
         std::cin>>x;
@@ -90,9 +90,25 @@ float type_polynomial(int size){
     return polynomial;
 }
 
+std::vector<double> type_complex_number(){
+
+    std::vector<double> complex_number;
+    double x;
+
+    std::cout << "Podaj czesc rzeczywista: ";
+    std::cin >> x;
+    complex_number.push_back(x);
+
+    std::cout << "Podaj czesc urojona: ";
+    std::cin >> x;
+    complex_number.push_back(x);
+
+    return complex_number;
+}
+
 int main() {
     std::cout << "Witaj uzytkowniku w kalkulatorze matematycznym  :P ";
-    std::cout << "Wybierz na czym chcesz wykonać operacje \n 1 - wektory \n 2 - macierze \n 3 - wielomiany  \n";
+    std::cout << "Wybierz na czym chcesz wykonać operacje \n 1 - wektory \n 2 - macierze \n 3 - wielomiany  \n 4 - liczby zespolone  \n";
     int odp;
     std::cin >> odp;
     if (odp == 1) { //wektor
@@ -172,6 +188,46 @@ int main() {
     else if (odp == 3) { //wielomiany
         std::cout << "";
         std::cin >> odp;
+    }
+
+    //liczby zespolone
+    else if (odp == 4) {
+        std::cout << "Wybierz operacje jaka chcesz wykonac \n 1 -dodawanie \n 2 - odejmowanie \n 3 - mnozenie \n 4 - dzielenie \n";
+        std::cin >> odp;
+
+        std::vector<double> complex_number;
+        std::cout << "Podaj pierwsza liczbe zespolona:";
+        complex_number = type_complex_number();
+
+        Complex z1;
+        z1.Re = complex_number[0];
+        z1.Im = complex_number[1];
+
+        std::cout << "Podaj druga liczbe zespolona:";
+        complex_number = type_complex_number();
+
+        Complex z2;
+        z2.Re = complex_number[0];
+        z2.Im = complex_number[1];
+
+        if (odp == 1){ //dodawanie
+            Complex z3 = ComplexAdd(z1, z2);
+
+            std::cout << "Suma liczb zespolonych to: \n";
+            std::cout << "Postac kanoniczna: " << complex_to_string(z3) << "\n";
+            std::cout << "Postac trygonometryczna: " << complex_trig_string(z3) << "\n";
+            std::cout << "Postac wykladnicza: " << complex_euler_string(z3) << "\n";
+
+        }
+        else if (odp == 2){ //odejmowanie
+
+        }
+        else if (odp == 3){ //mnożenie
+
+        }
+        else if (odp == 4){ //dzielenie
+
+        }
     }
     return 0;
 }
