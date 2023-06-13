@@ -285,3 +285,163 @@ Polynomial integral(const Polynomial& polinomial)
     }
     return integral_pol;
 }
+
+//Dodawanie liczb zespolonych
+Complex ComplexAdd(Complex z1, Complex z2) {
+    Complex z3;
+    z3.Re = z1.Re + z2.Re;
+    z3.Im = z1.Im + z2.Im;
+    return z3;
+}
+
+//Odejmowanie liczb zespolonych
+Complex ComplexSubtraction(Complex z1, Complex z2) {
+    Complex z3;
+    z3.Re = z1.Re - z2.Re;
+    z3.Im = z1.Im - z2.Im;
+    return z3;
+}
+
+//Mnożenie liczb zespolonych
+Complex ComplexMultiply(Complex z1, Complex z2) {
+    Complex z3;
+    z3.Re = z1.Re * z2.Re - z1.Im * z2.Im;
+    z3.Im = z1.Re * z2.Im + z1.Im * z2.Re;
+    return z3;
+}
+
+//Dzielenie liczb zespolonych
+Complex ComplexDevide(Complex z1, Complex z2) {
+    Complex z3;
+    double w;
+    w = z2.Re * z2.Re + z2.Im * z2.Im;
+
+    if (w > 0) {
+        z3.Re = (z1.Re * z2.Re + z1.Im * z2.Im) / w;
+        z3.Im = (z2.Re * z1.Im - z1.Re * z2.Im) / w;
+        return z3;
+    }
+
+    else {
+        printf("FUNCTION C_DIV ERROR: Wystapil blad podczas dzielenia \n");
+        system("PAUSE");
+        exit(10);
+    }
+}
+
+//Liczba zespolona na stringa (postać kanoniczna)
+std::string complex_to_string(Complex z) {
+    std::ostringstream to_string;
+    if (z.Re != 0) {
+        to_string << z.Re;
+        to_string << " + ";
+    }
+    if (z.Im != 0) {
+        to_string << z.Im;
+        to_string << "i";
+    }
+    return to_string.str();
+}
+
+//Postać trygonometryczna liczby zespolonej jako string
+std::string complex_trig_string(Complex z) {
+    std::ostringstream trig_string;
+
+    double phi; //kąt skierowany
+    double r; //moduł liczby zespolonej
+
+    r = sqrt(z.Re * z.Re + z.Im * z.Im);
+
+    if (r == 0) {
+        trig_string << 0;
+    }
+
+    else {
+        if (z.Im >= 0) {
+            phi = acos(z.Re / r);
+        }
+        else {
+            phi = -acos(z.Re / r);
+        }
+
+        trig_string << r;
+        trig_string << "( cos(";
+        trig_string << phi;
+        trig_string << ") + i sin(";
+        trig_string << phi;
+        trig_string << ") )";
+    }
+
+    return trig_string.str();
+}
+
+//Postać wykładnicza liczby zespolonej jako string
+std::string complex_euler_string(Complex z) {
+    std::ostringstream euler_string;
+
+    double phi; //kąt skierowany
+    double r; //moduł liczby zespolonej
+
+    r = sqrt(z.Re * z.Re + z.Im * z.Im);
+
+    if (r == 0) {
+        euler_string << 0;
+    }
+
+    else {
+        if (z.Im >= 0) {
+            phi = acos(z.Re / r);
+        }
+        else {
+            phi = -acos(z.Re / r);
+        }
+
+        euler_string << r;
+        euler_string << " exp(i ";
+        euler_string << phi;
+        euler_string << ")";
+    }
+
+    return euler_string.str();
+}
+
+//Pierwiastkowanie liczb zespolonych
+std::string ComplexRoot(Complex z, int degree) {
+    std::ostringstream answers;
+    answers << "(";
+
+    double phi; //kąt skierowany
+    double r; //moduł liczby zespolonej
+
+    r = sqrt(z.Re * z.Re + z.Im * z.Im);
+
+    if (r == 0) {
+        for(int i = 0; i < degree; i++) {
+            answers << 0;
+            answers << ", ";
+        }
+
+    }
+
+    else {
+        if (z.Im >= 0) {
+            phi = acos(z.Re / r);
+        }
+        else {
+            phi = -acos(z.Re / r);
+        }
+        for (int i = 0; i < degree; i++) {
+            std::ostringstream answer_string;
+            answer_string << r;
+            answer_string << "( cos(";
+            answer_string << (phi + 2 * i) / degree;
+            answer_string << ") + i sin(";
+            answer_string << (phi + 2 * i) / degree;
+            answer_string << ") )";
+            answers << answer_string.str();
+            answers << ",    ";
+        }
+    }
+    answers << ")";
+    return answers.str();
+}
