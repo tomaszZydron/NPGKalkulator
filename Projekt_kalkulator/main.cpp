@@ -6,16 +6,16 @@
 int type_size_vec(){
     int size = 0;
     while (size < 1){
-        std::cout << "Podaj rozmiar wektora: ";
+        std::cout << "Podaj rozmiar wektora: \n";
         std::cin >> size;
     }
     return size;
 }
 
 //zmienić typ
-std::vector<int> type_vec(int size ){
-    std::vector < int > v;
-    std::cout << "wpisz wektor: \n";
+std::vector<double> type_vec(int size ){
+    std::vector <double> v;
+    std::cout << "Wpisz wektor: \n";
     int x;
     for (int i = 0; i < size; i++){
         std::cout << "Wpisz " << i+1 << " wartosc: ";
@@ -96,26 +96,59 @@ int main() {
     int odp;
     std::cin >> odp;
     if (odp == 1) { //wektor
-        std::cout<< "Wybierz operacje jaka chcesz wykonac \n 1 -dodawanie \n 2 - iloczyn skalarny \n 3 - mnozenie przez skalar \n";
+        std::cout<< "Wybierz operacje jaka chcesz wykonac \n 1 -dodawanie \n 2 - iloczyn skalarny \n 3 - mnozenie przez skalar \n 4 - sprawdzanie zaleznosci \n 5 - obliczanie normy \n";
         std::cin >> odp;
+
         if (odp == 1){ //dodawanie
             int size = type_size_vec();
-            std::vector<int>v1 = type_vec(size);
-            std::vector<int>v2 = type_vec(size);
-            std::cout << "Suma wektorow to: " ;
+            std::cout << "Pierwszy wektor: \n";
+            Vect v1 = type_vec(size);
+            std::cout << "Drugi wektor: \n";
+            Vect v2 = type_vec(size);
+            std::cout << "Suma wektorow to: " << vector_to_string(add_vectors(v1, v2)) ;
         }
+
         if (odp == 2){ // iloczyn skalarny
             int size = type_size_vec();
-            std::vector<int>v1 = type_vec(size);
-            std::vector<int>v2 = type_vec(size);
-            std::cout << "Iloczyn skalarny wektorow to: " ;
+            std::cout << "Pierwszy wektor: \n";
+            Vect v1 = type_vec(size);
+            std::cout << "Drugi wektor: \n";
+            Vect v2 = type_vec(size);
+            std::cout << "Iloczyn skalarny wektorow to: " << scalar_product(v1, v2);
         }
+
         if (odp == 3){ // mnożenie przez skalar
             int size = type_size_vec();
-            std::vector<int>v1 = type_vec(size);
-            int scalar = 0;
-            std::cout << "podaj skalar: ";
+            Vect v1 = type_vec(size);
+            double scalar = 0;
+            std::cout << "Podaj skalar: ";
             std::cin >> scalar;
+            std::cout << "Wektor przemnozony przez skalar to : " << vector_to_string(multiply_vector(v1, scalar));
+        }
+
+        if (odp == 4){ // sprawdzenie zależności
+            int size = type_size_vec();
+
+            std::cout << "Pierwszy wektor: \n";
+            Vect v1 = type_vec(size);
+            std::cout << "Drugi wektor: \n";
+            Vect v2 = type_vec(size);
+
+            bool dependance = two_vector_dependance(v1, v2);
+            if(dependance == true){
+                std::cout << "Wektory sa zalezne.";
+            }
+            else {
+                std::cout << "Wektory nie sa zalezne.";
+            }
+
+        }
+
+        if (odp == 5){ //obliczanie normy
+            int size = type_size_vec();
+            Vect v1 = type_vec(size);
+
+            std::cout << "Norma wektora wynosi: " << v1.norm();
 
         }
     }
