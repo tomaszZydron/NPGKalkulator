@@ -234,3 +234,44 @@ std::string complex_euler_string(Complex z) {
 
     return euler_string.str();
 }
+
+//Pierwiastkowanie liczb zespolonych
+std::string ComplexRoot(Complex z, int degree) {
+    std::ostringstream answers;
+    answers << "(";
+
+    double phi; //kąt skierowany
+    double r; //moduł liczby zespolonej
+
+    r = sqrt(z.Re * z.Re + z.Im * z.Im);
+
+    if (r == 0) {
+        for(int i = 0; i < degree; i++) {
+            answers << 0;
+            answers << ", ";
+        }
+
+    }
+
+    else {
+        if (z.Im >= 0) {
+            phi = acos(z.Re / r);
+        }
+        else {
+            phi = -acos(z.Re / r);
+        }
+        for (int i = 0; i < degree; i++) {
+            std::ostringstream answer_string;
+            answer_string << r;
+            answer_string << "( cos(";
+            answer_string << (phi + 2 * i) / degree;
+            answer_string << ") + i sin(";
+            answer_string << (phi + 2 * i) / degree;
+            answer_string << ") )";
+            answers << answer_string.str();
+            answers << ",    ";
+        }
+    }
+    answers << ")";
+    return answers.str();
+}

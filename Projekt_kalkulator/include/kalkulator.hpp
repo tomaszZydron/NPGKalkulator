@@ -102,4 +102,7 @@ std::string complex_trig_string(Complex z);
 //Postać wykładnicza liczby zespolonej jako string
 std::string complex_euler_string(Complex z);
 
+//Pierwiastkowanie liczb zespolonych
+std::string ComplexRoot(Complex z, int degree);
+
 #endif //PROJEKT_KALKULATOR_KALKULATOR_HPP
