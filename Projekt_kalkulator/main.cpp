@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
-#include "kalkulator.hpp"
+#include "include/kalkulator.hpp"
 
 int type_size_vec(){
     int size = 0;
@@ -42,11 +42,11 @@ std::vector<int> type_size_matrix(){
     return size;
 }
 
-std::vector<std::vector<int>> type_matrix(int rows, int cols){
-    std::vector<std::vector<int>> matrix;
-    int value = 0;
+std::vector<std::vector<double>> type_matrix(int rows, int cols){
+    std::vector<std::vector<double>> matrix;
+    double value = 0;
     for (int x = 0 ; x < cols ; x++) {
-        std::vector<int> column;
+        std::vector<double> column;
         std::cout << "Wypisz " << x+1 << " kolumne \n";
         for(int y = 0; y <rows ; y++){
             std::cout << "Wypisz " << y+1 << " wartosc: ";
@@ -58,7 +58,7 @@ std::vector<std::vector<int>> type_matrix(int rows, int cols){
     return matrix;
 }
 
-void print_matrix(int rows, int cols, std::vector<std::vector<int>> matrix) {
+void print_matrix(int rows, int cols, std::vector<std::vector<double>> matrix) {
     std::stringstream ss;
     for (int x = 0; x < rows; x++){
         for(int y = 0; y < cols ; y++ ){
@@ -96,49 +96,52 @@ int main() {
     int odp;
     std::cin >> odp;
     if (odp == 1) { //wektor
-        std::cout<< "Wybierz operacje jaka chcesz wykonac \n 1 -dodawanie \n 2 - iloczyn skalarny \n 3 - mnozenie przez skalar \n";
+        std::cout
+                << "Wybierz operacje jaka chcesz wykonac \n 1 -dodawanie \n 2 - iloczyn skalarny \n 3 - mnozenie przez skalar \n";
         std::cin >> odp;
-        if (odp == 1){ //dodawanie
+        if (odp == 1) { //dodawanie
             int size = type_size_vec();
-            std::vector<int>v1 = type_vec(size);
-            std::vector<int>v2 = type_vec(size);
-            std::cout << "Suma wektorow to: " ;
+            std::vector<int> v1 = type_vec(size);
+            std::vector<int> v2 = type_vec(size);
+            std::cout << "Suma wektorow to: ";
         }
-        if (odp == 2){ // iloczyn skalarny
+        if (odp == 2) { // iloczyn skalarny
             int size = type_size_vec();
-            std::vector<int>v1 = type_vec(size);
-            std::vector<int>v2 = type_vec(size);
-            std::cout << "Iloczyn skalarny wektorow to: " ;
+            std::vector<int> v1 = type_vec(size);
+            std::vector<int> v2 = type_vec(size);
+            std::cout << "Iloczyn skalarny wektorow to: ";
         }
-        if (odp == 3){ // mnożenie przez skalar
+        if (odp == 3) { // mnożenie przez skalar
             int size = type_size_vec();
-            std::vector<int>v1 = type_vec(size);
+            std::vector<int> v1 = type_vec(size);
             int scalar = 0;
             std::cout << "podaj skalar: ";
             std::cin >> scalar;
 
         }
-    }
-    else if (odp == 2) { //macierze
-        std::cout<< "Wybierz operacje jaka chcesz wykonać \n 1 -dodawanie \n 2 - iloczyn \n";
+    } else if (odp == 2) { //macierze
+        std::cout << "Wybierz operacje jaka chcesz wykonać \n 1 -dodawanie \n 2 - iloczyn \n";
         std::cin >> odp;
-        if (odp == 1){ //dodawanie
+        if (odp == 1) { //dodawanie
             std::vector<int> size = type_size_matrix();
-            std::vector<std::vector<int>>matrix1 = type_matrix(size[0],size[1]);
-            //std::vector<std::vector<int>>matrix2 = type_matrix(size[0],size[1]);
+            Matrix matrix_1 = type_matrix(size[0], size[1]);
+            Matrix matrix_2 = type_matrix(size[0], size[1]);
+            std::cout << "Suma  to: " << matrix_to_string(add_matrices(matrix_1, matrix_2));
 
-            print_matrix(size[0],size[1],matrix1);
 
         }
-        if (odp == 2){ //iloczyn
+
+        if (odp == 2) { //iloczyn
             std::vector<int> size = type_size_matrix();
-            std::vector<std::vector<int>>matrix1 = type_matrix(size[0],size[1]);
-            std::vector<std::vector<int>>matrix2 = type_matrix(size[0],size[1]);
+            Matrix matrix_1 = type_matrix(size[0], size[1]);
+            Matrix matrix_2 = type_matrix(size[0], size[1]);
+            std::cout << "Iloczyn macierzy to " << matrix_to_string(multiply_matrices(matrix_1, matrix_2));
+         }
+    }
+        else if (odp == 3) { //wielomiany
+            std::cout << "";
+            std::cin >> odp;
         }
-    }
-    else if (odp == 3) { //wielomiany
-        std::cout << "";
-        std::cin >> odp;
-    }
-    return 0;
+
+        return 0;
 }
