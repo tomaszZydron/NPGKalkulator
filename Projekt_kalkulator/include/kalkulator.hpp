@@ -118,12 +118,15 @@ class Point
 class Line
 {
     public:
-        Line(float a, float b) : a_(a), b_(b) {}
-        float get_a() const {return a_;}
-        float get_b() const {return b_;}
+        Line(float a, float b, float c) : A_(a), B_(b), C_(c) {}
+        Line(const Point& A,const Point& B) : A_(1), B_((B.get_y()-A.get_y())/(B.get_x()-A.get_x())), C_(-A.get_x()-A.get_y()*(B.get_y()-A.get_y())/(B.get_x()-A.get_x())) {}
+        float get_a() const {return A_;}
+        float get_b() const {return B_;}
+        float get_c() const {return C_;}
     private:
-        float a_;
-        float b_;
+        float A_;
+        float B_;
+        float C_;
 };
 
 
