@@ -239,6 +239,12 @@ std::size_t size_t_max(std::size_t a, std::size_t b)
     return b;
 }
 
+int intmax(int a, int b)
+{
+    if(a>b) return a;
+    return b;
+}
+
 //suma wielomianów
 Polynomial add_polynomials(const Polynomial& p1, const Polynomial& p2)
 {
@@ -248,7 +254,7 @@ Polynomial add_polynomials(const Polynomial& p1, const Polynomial& p2)
     return sumvect;
 
 }
-
+//wielomian jako string
 std::string to_str(const Polynomial& v)
 {
     std::ostringstream oss;
@@ -258,13 +264,15 @@ std::string to_str(const Polynomial& v)
         {
             if ((i != v.get_size() - 1) && (v[i] > 0)) oss << " + ";
             if ((i != v.get_size() - 1) && (v[i] < 0)) oss << " - ";
-            if (i == v.get_size() - 1) oss << v[i] << "*x^" << i;
-            if (i != v.get_size() - 1) oss << abs(v[i]) << "*x^" << i;
+            if (i == v.get_size() - 1 && i != 0) oss << v[i] << "*x^" << i;
+            if (i != v.get_size() - 1 && i != 0) oss << abs(v[i]) << "*x^" << i;
+            if (i == v.get_size() - 1 && i == 0) oss << v[i];
+            if (i != v.get_size() - 1 && i == 0) oss << abs(v[i]);
         }
     }
     return oss.str();
 }
-
+//pochodna
 Polynomial derivate(const Polynomial& polinomial)
 {
     std::size_t pol_size = polinomial.get_size();
@@ -275,7 +283,7 @@ Polynomial derivate(const Polynomial& polinomial)
     }
     return derivative;
 }
-
+//całka
 Polynomial integral(const Polynomial& polinomial)
 {
     std::size_t pol_size = polinomial.get_size();
@@ -446,3 +454,126 @@ std::string ComplexRoot(Complex z, int degree) {
     answers << ")";
     return answers.str();
 }
+
+//mnożenie wielomianów
+Polynomial polynomial_multiplication(const Polynomial& p1, const Polynomial& p2)
+{
+    Polynomial result = Polynomial(p1.get_size() + p2.get_size() - 1);
+    for(int i = 0; i < p1.get_size(); i++)
+    {
+        for(int j = 0; j < p2.get_size(); j++)
+        {
+            result[i+j] += p1[i] + p2[j];
+        }
+    }
+    return result;
+}
+//potęga liczby
+float pow(float a, int power)
+{
+    float answer = 1;
+    if (power >= 0) {
+        for (int i = 0; i < power; i++) {
+            answer *= a;
+        }
+    }
+    for (int i = 0; i > power; i--) {
+        answer /= a;
+    }
+    return answer;
+}
+//wartość wielomianu dla argumentu
+float value(const Polynomial& polynomial, float val)
+{
+    float result = 0;
+    std::size_t size = polynomial.get_size();
+    for(int i = 0; i < (int) size; i++) result += polynomial[i] * pow(val, i);
+    return result;
+}
+
+//mnożenie wielomianu przez skalar
+Polynomial multiplicate_polynomial(const Polynomial& p, float a)
+{
+    Polynomial result = p;
+    for(int i = 0; i < p.get_size(); i++) result[i] *= a;
+    return result;
+}
+//znajdowanie pierwiastków
+float sqr(float a, int n, int accuracy) {
+    if (a < 0 && n % 2 == 0) {
+        throw std::invalid_argument("Error. Trying to calculate even root of negative number.");
+    }
+
+    Polynomial pom = Polynomial(n + 1);
+    pom[0] = -a;
+    pom[n] = 1;
+    float answer = 1;
+    if (pow(answer, n) == a) return answer;
+    Polynomial der = derivate(pom);
+    Polynomial line = Polynomial(2);
+    for (int i = 0; i < accuracy; i++) {
+        line[1] = value(der, answer);
+        line[0] = value(pom, answer) - line[1] * answer;
+        answer = -line[0] / line[1];
+    }
+    return answer;
+}
+std::tuple<Polynomial, float> divide(const Polynomial& p, float x)
+{
+    std::vector<Polynomial> v;
+    float rest = 0;
+    Polynomial pom = Polynomial(p.get_size() - 1);
+    pom[p.get_size() - 2] = p[p.get_size() - 1];
+    for(int i = int(p.get_size()) - 3; i >= 0; i--)
+    {
+        pom[i] = pom[i + 1] * x + p[i + 1];
+    }
+    rest = pom[0] * x + p[0];
+    return std::make_tuple(pom, rest);
+
+
+}
+
+int sn(int n, int k)
+{
+    if(k == 0 || n == 0) return 1;
+    if(n < k || n < 0) return 0;
+    return sn(n - 1, k-1) + sn(n-1, k);
+
+}
+Line::Line(const Point& A,const Point& B)
+{
+    if(A.get_x() == B.get_x() && A.get_y() == B.get_y())
+    {
+        A_ = 0;
+        B_ = 0;
+        C_ = 0;
+    }
+    else if(A.get_x() == B.get_x())
+    {
+        A_ = 1;
+        B_ = 0;
+        C_ = -A.get_x();
+    }
+    else if(A.get_y() == B.get_y())
+    {
+        A_ = 0;
+        B_ = 1;
+        C_ = -A.get_y();
+    }
+    else
+    {
+        A_ = 1;
+        B_ = (B.get_y()-A.get_y())/(B.get_x()-A.get_x());
+        C_ = -A.get_x()-A.get_y()*(B.get_y()-A.get_y())/(B.get_x()-A.get_x());
+    }
+
+}
+//: A_(1), B_((B.get_y()-A.get_y())/(B.get_x()-A.get_x())), C_(-A.get_x()-A.get_y()*(B.get_y()-A.get_y())/(B.get_x()-A.get_x()))
+
+
+float distance(const Point& A, const Line& line)
+{
+    return abs(line.get_a()*A.get_x()+line.get_b()*A.get_y()+line.get_c())/sqrt(pow(line.get_a(),2)+pow(line.get_b(),2));
+}
+
