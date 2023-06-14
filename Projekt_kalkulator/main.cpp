@@ -133,9 +133,11 @@ int main() {
             }
             if (odp == 2) { //iloczyn
                 std::vector<int> size = type_size_matrix();
+                std::cout << "Podaj lewa macierz\n ";
                 Matrix matrix_1 = type_matrix(size[0], size[1]);
+                std::cout << "\n Podaj prawa macierz\n ";
                 Matrix matrix_2 = type_matrix(size[0], size[1]);
-                std::cout << "Iloczyn macierzy to " << matrix_to_string(multiply_matrices(matrix_1, matrix_2));
+                std::cout << "\nIloczyn macierzy to " << matrix_to_string(multiply_matrices(matrix_1, matrix_2));
             }
             if (odp == 3) { //macierz transponowana
                 std::vector<int> size = type_size_matrix();
