@@ -92,56 +92,89 @@ float type_polynomial(int size){
 
 int main() {
     std::cout << "Witaj uzytkowniku w kalkulatorze matematycznym  :P ";
-    std::cout << "Wybierz na czym chcesz wykonać operacje \n 1 - wektory \n 2 - macierze \n 3 - wielomiany  \n";
-    int odp;
-    std::cin >> odp;
-    if (odp == 1) { //wektor
-        std::cout
-                << "Wybierz operacje jaka chcesz wykonac \n 1 -dodawanie \n 2 - iloczyn skalarny \n 3 - mnozenie przez skalar \n";
+    bool should_calc_work = true;
+    while (should_calc_work == true) {
+        std::cout << "Wybierz na czym chcesz wykonać operacje \n 1 - wektory \n 2 - macierze \n 3 - wielomiany  \n";
+        int odp;
         std::cin >> odp;
-        if (odp == 1) { //dodawanie
-            int size = type_size_vec();
-            std::vector<int> v1 = type_vec(size);
-            std::vector<int> v2 = type_vec(size);
-            std::cout << "Suma wektorow to: ";
-        }
-        if (odp == 2) { // iloczyn skalarny
-            int size = type_size_vec();
-            std::vector<int> v1 = type_vec(size);
-            std::vector<int> v2 = type_vec(size);
-            std::cout << "Iloczyn skalarny wektorow to: ";
-        }
-        if (odp == 3) { // mnożenie przez skalar
-            int size = type_size_vec();
-            std::vector<int> v1 = type_vec(size);
-            int scalar = 0;
-            std::cout << "podaj skalar: ";
-            std::cin >> scalar;
+        if (odp == 1) { //wektor
+            std::cout
+                    << "Wybierz operacje jaka chcesz wykonac \n 1 -dodawanie \n 2 - iloczyn skalarny \n 3 - mnozenie przez skalar \n";
+            std::cin >> odp;
+            if (odp == 1) { //dodawanie
+                int size = type_size_vec();
+                std::vector<int> v1 = type_vec(size);
+                std::vector<int> v2 = type_vec(size);
+                std::cout << "Suma wektorow to: ";
+            }
+            if (odp == 2) { // iloczyn skalarny
+                int size = type_size_vec();
+                std::vector<int> v1 = type_vec(size);
+                std::vector<int> v2 = type_vec(size);
+                std::cout << "Iloczyn skalarny wektorow to: ";
+            }
+            if (odp == 3) { // mnożenie przez skalar
+                int size = type_size_vec();
+                std::vector<int> v1 = type_vec(size);
+                int scalar = 0;
+                std::cout << "podaj skalar: ";
+                std::cin >> scalar;
+
+            }
+        } else if (odp == 2) { //macierze
+            std::cout << "Wybierz operacje jaka chcesz wykonać: \n 1 -dodawanie \n 2 - iloczyn \n 3 - macierz transponowana \n 4 - wyznacznik macierzy \n  5 - postac schodkowa macierzy \n 6 - mnozenie przez skalar \n";
+            std::cin >> odp;
+
+            if (odp == 1) { //dodawanie
+                std::vector<int> size = type_size_matrix();
+                Matrix matrix_1 = type_matrix(size[0], size[1]);
+                Matrix matrix_2 = type_matrix(size[0], size[1]);
+                std::cout << "Suma  to: " << matrix_to_string(add_matrices(matrix_1, matrix_2));
+            }
+            if (odp == 2) { //iloczyn
+                std::vector<int> size = type_size_matrix();
+                Matrix matrix_1 = type_matrix(size[0], size[1]);
+                Matrix matrix_2 = type_matrix(size[0], size[1]);
+                std::cout << "Iloczyn macierzy to " << matrix_to_string(multiply_matrices(matrix_1, matrix_2));
+            }
+            if (odp == 3) { //macierz transponowana
+                std::vector<int> size = type_size_matrix();
+                Matrix matrix_1 = type_matrix(size[0], size[1]);
+                std::cout << "Macierz tranponowana to: \n " << matrix_to_string(transpose_matrix(matrix_1));
+            }
+            if (odp == 4) { //wyznacznik macierzy
+                std::vector<int> size = type_size_matrix();
+                Matrix matrix_1 = type_matrix(size[0], size[1]);
+                std::cout << "Wyzancznik macierzy to:  " << matrix_determinant(matrix_1);
+            }
+            if (odp == 5) { //postać schodkowa macierzy
+                std::vector<int> size = type_size_matrix();
+                Matrix matrix_1 = type_matrix(size[0], size[1]);
+                echelon_form(matrix_1);
+                std::cout << "Postac schodkowa macierzy to: \n " << matrix_to_string((matrix_1));
+            }
+            if (odp == 6) { //mnozenie przez skalar
+                std::vector<int> size = type_size_matrix();
+                Matrix matrix_1 = type_matrix(size[0], size[1]);
+                std::cout << "Podaj skalar: ";
+                double scalar;
+                std::cin >> scalar;
+                std::cout << "Iloczyn to:\n " << matrix_to_string(multiply_matrix(matrix_1,scalar));
+            }
 
         }
-    } else if (odp == 2) { //macierze
-        std::cout << "Wybierz operacje jaka chcesz wykonać \n 1 -dodawanie \n 2 - iloczyn \n";
-        std::cin >> odp;
-        if (odp == 1) { //dodawanie
-            std::vector<int> size = type_size_matrix();
-            Matrix matrix_1 = type_matrix(size[0], size[1]);
-            Matrix matrix_2 = type_matrix(size[0], size[1]);
-            std::cout << "Suma  to: " << matrix_to_string(add_matrices(matrix_1, matrix_2));
-
-
-        }
-
-        if (odp == 2) { //iloczyn
-            std::vector<int> size = type_size_matrix();
-            Matrix matrix_1 = type_matrix(size[0], size[1]);
-            Matrix matrix_2 = type_matrix(size[0], size[1]);
-            std::cout << "Iloczyn macierzy to " << matrix_to_string(multiply_matrices(matrix_1, matrix_2));
-         }
-    }
         else if (odp == 3) { //wielomiany
             std::cout << "";
             std::cin >> odp;
         }
-
+        std::string ans;
+        std::cout << "\n \n czy chcesz wykonać kolejne działanie T/N: ";
+        std::cin >> ans;
+        if (ans == "N" or ans == "n" or ans == "nie" or ans == "Nie") {
+            should_calc_work = false;
+            std::cout << "Dziekujemy za korzystanie z naszego kalkulatora, zyczymy milego dnia i ladnej delty :P ";
+        }
+        std::cout << "\n\n";
+    }
         return 0;
 }
