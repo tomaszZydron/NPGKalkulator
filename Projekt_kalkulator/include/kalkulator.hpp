@@ -119,7 +119,7 @@ class Line
 {
     public:
         Line(float a, float b, float c) : A_(a), B_(b), C_(c) {}
-        Line(const Point& A,const Point& B) : A_(1), B_((B.get_y()-A.get_y())/(B.get_x()-A.get_x())), C_(-A.get_x()-A.get_y()*(B.get_y()-A.get_y())/(B.get_x()-A.get_x())) {}
+        Line(const Point& A,const Point& B);
         float get_a() const {return A_;}
         float get_b() const {return B_;}
         float get_c() const {return C_;}
@@ -128,7 +128,7 @@ class Line
         float B_;
         float C_;
 };
-
+float distance(const Point& A, const Line& line);
 
 
 #endif //PROJEKT_KALKULATOR_KALKULATOR_HPP

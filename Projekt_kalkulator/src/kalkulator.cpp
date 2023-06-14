@@ -209,3 +209,38 @@ int sn(int n, int k)
     return sn(n - 1, k-1) + sn(n-1, k);
 
 }
+Line::Line(const Point& A,const Point& B)
+{
+    if(A.get_x() == B.get_x() && A.get_y() == B.get_y())
+    {
+        A_ = 0;
+        B_ = 0;
+        C_ = 0;
+    }
+    else if(A.get_x() == B.get_x())
+    {
+        A_ = 1;
+        B_ = 0;
+        C_ = -A.get_x();
+    }
+    else if(A.get_y() == B.get_y())
+    {
+        A_ = 0;
+        B_ = 1;
+        C_ = -A.get_y();
+    }
+    else
+    {
+        A_ = 1;
+        B_ = (B.get_y()-A.get_y())/(B.get_x()-A.get_x());
+        C_ = -A.get_x()-A.get_y()*(B.get_y()-A.get_y())/(B.get_x()-A.get_x());
+    }
+
+}
+//: A_(1), B_((B.get_y()-A.get_y())/(B.get_x()-A.get_x())), C_(-A.get_x()-A.get_y()*(B.get_y()-A.get_y())/(B.get_x()-A.get_x()))
+
+
+float distance(const Point& A, const Line& line)
+{
+    return abs(line.get_a()*A.get_x()+line.get_b()*A.get_y()+line.get_c())/sqrt(pow(line.get_a(),2)+pow(line.get_b(),2));
+}
