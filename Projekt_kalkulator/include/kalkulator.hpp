@@ -152,7 +152,7 @@ Complex ComplexSubtraction(Complex c1, Complex c2);
 Complex ComplexMultiply(Complex c1, Complex c2);
 
 //Dzielenie liczb zespolonych
-Complex ComplexDevide(Complex z1, Complex z2);
+Complex ComplexDivide(Complex z1, Complex z2);
 
 //Liczba zespolona na stringa (postać kanoniczna)
 std::string complex_to_string(Complex z);

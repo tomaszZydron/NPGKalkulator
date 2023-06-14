@@ -312,7 +312,7 @@ Complex ComplexMultiply(Complex z1, Complex z2) {
 }
 
 //Dzielenie liczb zespolonych
-Complex ComplexDevide(Complex z1, Complex z2) {
+Complex ComplexDivide(Complex z1, Complex z2) {
     Complex z3;
     double w;
     w = z2.Re * z2.Re + z2.Im * z2.Im;
@@ -333,14 +333,14 @@ Complex ComplexDevide(Complex z1, Complex z2) {
 //Liczba zespolona na stringa (postać kanoniczna)
 std::string complex_to_string(Complex z) {
     std::ostringstream to_string;
-    if (z.Re != 0) {
+
         to_string << z.Re;
         to_string << " + ";
-    }
-    if (z.Im != 0) {
+
+
         to_string << z.Im;
         to_string << "i";
-    }
+
     return to_string.str();
 }
 
@@ -440,7 +440,7 @@ std::string ComplexRoot(Complex z, int degree) {
             answer_string << (phi + 2 * i) / degree;
             answer_string << ") )";
             answers << answer_string.str();
-            answers << ",    ";
+            answers << ",  \n";
         }
     }
     answers << ")";

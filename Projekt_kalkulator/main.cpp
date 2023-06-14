@@ -192,41 +192,76 @@ int main() {
 
     //liczby zespolone
     else if (odp == 4) {
-        std::cout << "Wybierz operacje jaka chcesz wykonac \n 1 -dodawanie \n 2 - odejmowanie \n 3 - mnozenie \n 4 - dzielenie \n";
+        std::cout << "Wybierz operacje jaka chcesz wykonac \n 1 -dodawanie \n 2 - odejmowanie \n 3 - mnozenie \n 4 - dzielenie \n 5 - pierwiastkowanie \n 6 - postac trygonometryczna \n 7 - postac wykladnicza \n";
         std::cin >> odp;
 
         std::vector<double> complex_number;
-        std::cout << "Podaj pierwsza liczbe zespolona:";
-        complex_number = type_complex_number();
 
-        Complex z1;
-        z1.Re = complex_number[0];
-        z1.Im = complex_number[1];
+        if( 1 <= odp and odp <= 4) {
+            std::cout << "Podaj pierwsza liczbe zespolona: \n";
+            complex_number = type_complex_number();
 
-        std::cout << "Podaj druga liczbe zespolona:";
-        complex_number = type_complex_number();
+            Complex z1;
+            z1.Re = complex_number[0];
+            z1.Im = complex_number[1];
 
-        Complex z2;
-        z2.Re = complex_number[0];
-        z2.Im = complex_number[1];
+            std::cout << "\n Podaj druga liczbe zespolona: \n";
+            complex_number = type_complex_number();
 
-        if (odp == 1){ //dodawanie
-            Complex z3 = ComplexAdd(z1, z2);
+            Complex z2;
+            z2.Re = complex_number[0];
+            z2.Im = complex_number[1];
 
-            std::cout << "Suma liczb zespolonych to: \n";
-            std::cout << "Postac kanoniczna: " << complex_to_string(z3) << "\n";
-            std::cout << "Postac trygonometryczna: " << complex_trig_string(z3) << "\n";
-            std::cout << "Postac wykladnicza: " << complex_euler_string(z3) << "\n";
+            if (odp == 1) { //dodawanie
+                Complex z3 = ComplexAdd(z1, z2);
 
+                std::cout << "\n Suma liczb zespolonych to: " << complex_to_string(z3) << "\n";
+
+                //std::cout << "Postac trygonometryczna: " << complex_trig_string(z3) << "\n";
+                //std::cout << "Postac wykladnicza: " << complex_euler_string(z3) << "\n";
+
+            } else if (odp == 2) { //odejmowanie
+                Complex z3 = ComplexSubtraction(z1, z2);
+                std::cout << "\n Roznica liczb zespolonych to: " << complex_to_string(z3) << "\n";
+
+            } else if (odp == 3) { //mnożenie
+                Complex z3 = ComplexMultiply(z1, z2);
+                std::cout << "Iloczyn liczb zespolonych to: " << complex_to_string(z3) << "\n";
+
+            } else if (odp == 4) { //dzielenie
+                Complex z3 = ComplexDivide(z1, z2);
+                std::cout << "Iloraz liczb zespolonych to: " << complex_to_string(z3) << "\n";
+            }
         }
-        else if (odp == 2){ //odejmowanie
+        else if (odp == 5){//pierwiastek
+            std::cout << "Podaj liczbe zespolona: \n";
+            complex_number = type_complex_number();
 
+            Complex z1;
+            z1.Re = complex_number[0];
+            z1.Im = complex_number[1];
+
+            int degree;
+            std::cout << "Podaj stopien pierwiastka: \n";
+            std::cin >> degree;
+
+            std::cout << "Pierwiastki " << degree << "-tego stopnia to: \n" << ComplexRoot(z1, degree);
         }
-        else if (odp == 3){ //mnożenie
+        else if (odp == 6 or odp == 7){
+            std::cout << "Podaj liczbe zespolona: \n";
+            complex_number = type_complex_number();
 
-        }
-        else if (odp == 4){ //dzielenie
+            Complex z1;
+            z1.Re = complex_number[0];
+            z1.Im = complex_number[1];
 
+
+            if (odp == 6){//postać trygonometryczna
+                std::cout << "Postac trygonometryczna: \n" << complex_trig_string(z1) << "\n";
+            }
+            if (odp == 7){//postać wykładnicza
+                std::cout << "Postac wykladnicza: \n" << complex_euler_string(z1) << "\n";
+            }
         }
     }
     return 0;
