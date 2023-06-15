@@ -249,9 +249,17 @@ int intmax(int a, int b)
 Polynomial add_polynomials(const Polynomial& p1, const Polynomial& p2)
 {
     std::size_t size = size_t_max(p1.get_size(), p2.get_size());
-    Polynomial sumvect = Polynomial(size);
-    for(std::size_t i = 0; i < size; i++) sumvect[i] += p1[i] + p2[i];
-    return sumvect;
+    if(p1.get_size() > p2.get_size())
+    {
+        Polynomial sumvect = p1;
+        for(int i = 0; i < int(p2.get_size()); i++) sumvect[i] += p2[i];
+        return sumvect;
+    }
+    else {
+        Polynomial sumvect = p2;
+        for (int i = 0; i < int(p1.get_size()); i++) sumvect[i] += p1[i];
+        return sumvect;
+    }
 
 }
 //wielomian jako string
@@ -463,7 +471,7 @@ Polynomial polynomial_multiplication(const Polynomial& p1, const Polynomial& p2)
     {
         for(int j = 0; j < p2.get_size(); j++)
         {
-            result[i+j] += p1[i] + p2[j];
+            result[i+j] += p1[i] * p2[j];
         }
     }
     return result;
