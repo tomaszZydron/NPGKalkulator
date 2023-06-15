@@ -170,7 +170,7 @@ int main() {
         }
     }
     else if (odp == 3) { //wielomiany
-        std::cout << "Wybierz operacje jaka chcesz wykonac \n 1 - dodawanie \n 2 - mnozenie \n 3 - znajdowanie pierwiastkow \n 4 - podstawienie argumentu \n 5 - pochodna \n 6 - calka \n";
+        std::cout << "Wybierz operacje jaka chcesz wykonac \n 1 - dodawanie \n 2 - mnozenie \n 3 - podstawienie argumentu \n 4 - pochodna \n 5 - calka \n";
         std::cin >> odp;
         if(odp == 1) { // dodawanie
             std::cout << "Pierwszy wielomian: \n";
@@ -180,7 +180,6 @@ int main() {
             size = type_size_polynomial();
             Polynomial p2 = type_polynomial(size);
             std::cout << "Suma tych wielomianow to: " << to_str(add_polynomials(p1, p2));
-            //POTRZEBNA POPRAWA FUNKCJI add_polynomials !!!
         }
         if(odp == 2) { //mnożenie
             std::cout << "Pierwszy wielomian: \n";
@@ -190,15 +189,8 @@ int main() {
             size = type_size_polynomial();
             Polynomial p2 = type_polynomial(size);
             std::cout << "Iloczyn tych wielomianow to: " << to_str(polynomial_multiplication(p1, p2));
-            // POTRZEBNA POPRAWA FUNCKJI polynomial_multiplication !!! (możliwe, że zwiazanie z zamianą returna funkcji type_size_polynomial z size na size+1)
         }
-        if(odp == 3) { //znajdowanie pierwiastkow
-            std::cout << "Podaj wielomian: \n";
-            int size = type_size_polynomial();
-            Polynomial p1 = type_polynomial(size);
-            // do zrobienia przez kogoś innego, ja nie rozumiem kodu.
-        }
-        if (odp == 4) { //podstawienie argumentu
+        if (odp == 3) { //podstawienie argumentu
             std::cout << "Podaj wielomian: \n";
             int size = type_size_polynomial();
             Polynomial p1 = type_polynomial(size);
@@ -207,13 +199,13 @@ int main() {
             std::cin >> val;
             std::cout << "Wartosc wielomianu dla podanego argumentu to: \n" << value(p1, val);
         }
-        if (odp == 5) { //pochodna
+        if (odp == 4) { //pochodna
             std::cout << "Podaj wielomian: \n";
             int size = type_size_polynomial();
             Polynomial p1 = type_polynomial(size);
             std::cout << "Pochodna tego wielomianu to: " << to_str(derivate(p1));
         }
-        if (odp == 6) { //całka
+        if (odp == 5) { //całka
             std::cout << "Podaj wielomian: \n";
             int size = type_size_polynomial();
             Polynomial p1 = type_polynomial(size);
