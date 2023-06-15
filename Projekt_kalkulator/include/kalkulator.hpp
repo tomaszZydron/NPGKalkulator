@@ -5,6 +5,8 @@
 #include <vector>
 #include <cstddef>
 #include <string>
+#include <stdexcept>
+#include <tuple>
 
 //klasa odpowiadająca za wektory
 class Vect {
@@ -119,8 +121,18 @@ public:
     Polynomial(int size, float val = 0) : coeficient_(size, val) {}
     Polynomial(const std::vector<float>& v) : coeficient_(v) {}
     int get_size() const {return coeficient_.size();}
+    ~Polynomial() = default;
     const float& operator[](std::size_t pos) const { return coeficient_[pos]; }
     float& operator[](std::size_t pos) { return coeficient_[pos]; }
+    std::vector<float>::const_iterator cbegin() const {return coeficient_.cbegin(); }
+    std::vector<float>::const_iterator cend() const {return coeficient_.cend(); }
+
+    std::vector<float>::iterator begin() {return coeficient_.begin(); }
+    std::vector<float>::iterator end() {return coeficient_.end(); }
+
+    std::vector<float>::const_iterator begin() const {return coeficient_.cbegin(); }
+    std::vector<float>::const_iterator end() const {return coeficient_.cend(); }
+
 private:
     std::vector<float> coeficient_;
 };
@@ -128,6 +140,9 @@ private:
 Polynomial add_polynomials(const Polynomial& p1, const Polynomial& p2);
 
 std::size_t size_t_max(std::size_t a, std::size_t b);
+
+
+int intmax(int a, int b);
 
 std::string to_str(const Polynomial& v);
 
@@ -165,5 +180,48 @@ std::string complex_euler_string(Complex z);
 
 //Pierwiastkowanie liczb zespolonych
 std::string ComplexRoot(Complex z, int degree);
+
+Polynomial polynomial_multiplication(const Polynomial& p1, const Polynomial& p2);
+
+float pow(float a, int power);
+
+float value(const Polynomial& polynomial, float val);
+
+Polynomial multiplicate_polynomial(const Polynomial& p, float a);
+
+float sqr(float a, int n = 2, int accuracy = 100000);
+
+std::tuple<Polynomial, float> divide(const Polynomial& p, float x);
+
+int sn(int n, int k);
+
+class Point
+{
+    public:
+        Point(float x, float y) : x_(x), y_(y) {}
+        float get_x() const {return x_;}
+        float get_y() const {return y_;}
+        ~Point() = default;
+        void move(float dx, float dy) {x_ += dx; y_ += dy;}
+    private:
+        float x_;
+        float y_;
+};
+
+class Line
+{
+    public:
+        Line(float a, float b, float c) : A_(a), B_(b), C_(c) {}
+        Line(const Point& A,const Point& B);
+        float get_a() const {return A_;}
+        float get_b() const {return B_;}
+        float get_c() const {return C_;}
+    private:
+        float A_;
+        float B_;
+        float C_;
+};
+float distance(const Point& A, const Line& line);
+
 
 #endif //PROJEKT_KALKULATOR_KALKULATOR_HPP
