@@ -245,7 +245,7 @@ int main() {
             std::cout << "Podaj stopien pierwiastka: \n";
             std::cin >> degree;
 
-            std::cout << "Pierwiastki " << degree << "-tego stopnia to: \n" << ComplexRoot(z1, degree);
+            std::cout << "Pierwiastki " << degree << "-ego stopnia to: \n" << ComplexRoot(z1, degree);
         }
         else if (odp == 6 or odp == 7){
             std::cout << "Podaj liczbe zespolona: \n";
