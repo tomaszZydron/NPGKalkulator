@@ -70,24 +70,24 @@ void print_matrix(int rows, int cols, std::vector<std::vector<int>> matrix) {
 }
 
 int type_size_polynomial(){
-    int size = 0;
-    while (size <= 1){
+    int size = -1;
+    while (size < 0){
         std::cout << "Podaj stopien wielomianu: ";
         std::cin >> size;
     }
-    return size;
+    return size + 1;
 }
 
-float type_polynomial(int size){
-    std::stringstream ss;
-    int a = 0;
-    for (int i = size; i > 0; i--){
-        std::cout << "podaj wartosc przy x^"<<size<<": ";
-        std::cin >> a;
-        ss<<a<<"*x^"<<i<<" + ";
+std::vector<float> type_polynomial(int size){
+    std::vector <float> v;
+    std::cout << "Wpisz wielomian: \n";
+    float x;
+    for (int i = 0; i < size; i++){
+        std::cout << "Wpisz wartosc przy x^" << i << " : ";
+        std::cin>>x;
+        v.push_back(x);
     }
-    float polynomial = ss.get();
-    return polynomial;
+    return v;
 }
 
 std::vector<double> type_complex_number(){
@@ -186,8 +186,56 @@ int main() {
         }
     }
     else if (odp == 3) { //wielomiany
-        std::cout << "";
+        std::cout << "Wybierz operacje jaka chcesz wykonac \n 1 - dodawanie \n 2 - mnozenie \n 3 - podstawienie argumentu \n 4 - pochodna \n 5 - calka \n 6 - dzielenie przez (x-a) \n";
         std::cin >> odp;
+        if(odp == 1) { // dodawanie
+            std::cout << "Pierwszy wielomian: \n";
+            int size = type_size_polynomial();
+            Polynomial p1 = type_polynomial(size);
+            std::cout << "Drugi wielomian: \n";
+            size = type_size_polynomial();
+            Polynomial p2 = type_polynomial(size);
+            std::cout << "Suma tych wielomianow to: " << to_str(add_polynomials(p1, p2));
+        }
+        if(odp == 2) { //mnożenie
+            std::cout << "Pierwszy wielomian: \n";
+            int size = type_size_polynomial();
+            Polynomial p1 = type_polynomial(size);
+            std::cout << "Drugi wielomian: \n";
+            size = type_size_polynomial();
+            Polynomial p2 = type_polynomial(size);
+            std::cout << "Iloczyn tych wielomianow to: " << to_str(polynomial_multiplication(p1, p2));
+        }
+        if (odp == 3) { //podstawienie argumentu
+            std::cout << "Podaj wielomian: \n";
+            int size = type_size_polynomial();
+            Polynomial p1 = type_polynomial(size);
+            std::cout << "Podaj wartosc x, dla ktorej chcesz obliczyc wartosc wielomianu: \n";
+            float val = 0;
+            std::cin >> val;
+            std::cout << "Wartosc wielomianu dla podanego argumentu to: \n" << value(p1, val);
+        }
+        if (odp == 4) { //pochodna
+            std::cout << "Podaj wielomian: \n";
+            int size = type_size_polynomial();
+            Polynomial p1 = type_polynomial(size);
+            std::cout << "Pochodna tego wielomianu to: " << to_str(derivate(p1));
+        }
+        if (odp == 5) { //całka
+            std::cout << "Podaj wielomian: \n";
+            int size = type_size_polynomial();
+            Polynomial p1 = type_polynomial(size);
+            std::cout << "Całka tego wielomianu to: " << to_str(integral(p1));
+        }
+        if (odp == 6) { //dzielenie przez (x-a)
+            std::cout << "Podaj wielomian do podzielenia: \n";
+            int size = type_size_polynomial();
+            Polynomial p1 = type_polynomial(size);
+            float a = 0;
+            std::cout << "Podaj wartosc a w (x-a): ";
+            std::cin >> a;
+            std::cout << "Wynik tego dzielenia to: " << to_str(std::get<0>(divide(p1, a))) << " + reszta: " << std::get<1>(divide(p1, a));
+        }
     }
 
     //liczby zespolone
