@@ -170,7 +170,7 @@ int main() {
         }
     }
     else if (odp == 3) { //wielomiany
-        std::cout << "Wybierz operacje jaka chcesz wykonac \n 1 - dodawanie \n 2 - mnozenie \n 3 - podstawienie argumentu \n 4 - pochodna \n 5 - calka \n";
+        std::cout << "Wybierz operacje jaka chcesz wykonac \n 1 - dodawanie \n 2 - mnozenie \n 3 - podstawienie argumentu \n 4 - pochodna \n 5 - calka \n 6 - dzielenie przez (x-a) \n";
         std::cin >> odp;
         if(odp == 1) { // dodawanie
             std::cout << "Pierwszy wielomian: \n";
@@ -210,6 +210,15 @@ int main() {
             int size = type_size_polynomial();
             Polynomial p1 = type_polynomial(size);
             std::cout << "Całka tego wielomianu to: " << to_str(integral(p1));
+        }
+        if (odp == 6) { //dzielenie przez (x-a)
+            std::cout << "Podaj wielomian do podzielenia: \n";
+            int size = type_size_polynomial();
+            Polynomial p1 = type_polynomial(size);
+            float a = 0;
+            std::cout << "Podaj wartosc a w (x-a): ";
+            std::cin >> a;
+            std::cout << "Wynik tego dzielenia to: " << to_str(std::get<0>(divide(p1, a))) << " + reszta: " << std::get<1>(divide(p1, a));
         }
     }
     return 0;
