@@ -580,8 +580,21 @@ Line::Line(const Point& A,const Point& B)
 //: A_(1), B_((B.get_y()-A.get_y())/(B.get_x()-A.get_x())), C_(-A.get_x()-A.get_y()*(B.get_y()-A.get_y())/(B.get_x()-A.get_x()))
 
 
-float distance(const Point& A, const Line& line)
+float distance_point_line(const Point& A, const Line& line)
 {
     return abs(line.get_a()*A.get_x()+line.get_b()*A.get_y()+line.get_c())/sqrt(pow(line.get_a(),2)+pow(line.get_b(),2));
 }
 
+float distance_point_point(const Point& A, const Point& B)
+{
+    return sqr(pow(A.get_x()-B.get_x(),2)+pow(A.get_y()-B.get_y(),2));
+}
+
+float distance_line_line(const Line& l1, const Line& l2)
+{
+    if(l1.get_b() / l1.get_a() == l2.get_b() / l2.get_a() || l1.get_a() / l1.get_b() == l2.get_a() / l2.get_b() )
+    {
+        return abs(l1.get_c() - l2.get_c()) / sqr(pow(l1.get_a(), 2) + pow(l1.get_b(), 2));
+    }
+    else return 0;
+}

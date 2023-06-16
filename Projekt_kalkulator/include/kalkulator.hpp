@@ -221,7 +221,12 @@ class Line
         float B_;
         float C_;
 };
-float distance(const Point& A, const Line& line);
+
+float distance_point_line(const Point& A, const Line& line);
+
+float distance_point_point(const Point& A, const Point& B);
+
+float distance_line_line(const Line& l1, const Line& l2);
 
 
 #endif //PROJEKT_KALKULATOR_KALKULATOR_HPP
