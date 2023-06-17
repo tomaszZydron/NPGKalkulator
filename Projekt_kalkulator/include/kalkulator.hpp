@@ -7,6 +7,7 @@
 #include <string>
 #include <stdexcept>
 #include <tuple>
+#include <map>
 
 //klasa odpowiadająca za wektory
 class Vect {
@@ -202,17 +203,21 @@ class Point
         float get_x() const {return x_;}
         float get_y() const {return y_;}
         ~Point() = default;
+
+        bool operator==(const Point& other);
         void move(float dx, float dy) {x_ += dx; y_ += dy;}
     private:
         float x_;
         float y_;
 };
+bool operator<(const Point& lhs, const Point& rhs);
 
 class Line
 {
     public:
         Line(float a, float b, float c) : A_(a), B_(b), C_(c) {}
         Line(const Point& A,const Point& B);
+        ~Line() = default;
         float get_a() const {return A_;}
         float get_b() const {return B_;}
         float get_c() const {return C_;}
@@ -227,6 +232,22 @@ float distance_point_line(const Point& A, const Line& line);
 float distance_point_point(const Point& A, const Point& B);
 
 float distance_line_line(const Line& l1, const Line& l2);
+
+class Triangle
+{
+    public:
+        Triangle(const Point& A, const Point& B, const Point& C) : A_(A), B_(B), C_(C) {}
+        ~Triangle() = default;
+        Point get_a() const {return A_;}
+        Point get_b() const {return B_;}
+        Point get_c() const {return C_;}
+        std::map<Point, float> sides_lengths();
+        float triangle_area();
+    private:
+        Point A_;
+        Point B_;
+        Point C_;
+};
 
 
 #endif //PROJEKT_KALKULATOR_KALKULATOR_HPP

@@ -7,6 +7,7 @@
 #include <numeric>
 #include <string>
 #include <math.h>
+#include <algorithm>
 
 //norma wektora
 double Vect::norm() const {
@@ -597,4 +598,37 @@ float distance_line_line(const Line& l1, const Line& l2)
         return abs(l1.get_c() - l2.get_c()) / sqr(pow(l1.get_a(), 2) + pow(l1.get_b(), 2));
     }
     else return 0;
+}
+bool operator<(const Point& lhs, const Point& rhs)
+{
+    if (lhs.get_x() < rhs.get_x())
+        return true;
+    if (lhs.get_x() > rhs.get_x())
+        return false;
+    return lhs.get_y() < rhs.get_y();
+}
+bool Point::operator==(const Point& other)
+{
+    if(x_ == other.get_x() && y_ == other.get_y()) return true;
+    else return false;
+}
+//zwraca dlugosc boku naprzeciwko danego punktu
+std::map<Point, float> Triangle::sides_lengths()
+{
+    float lA = distance_point_point(B_, C_);
+    float lB = distance_point_point(A_, C_);
+    float lC = distance_point_point(B_, A_);
+    std::map<Point, float> dictionary {
+            {A_, lA}, {B_, lB}, {C_, lC}
+    };
+    return dictionary;
+}
+float Triangle::triangle_area()
+{
+    std::map<Point, float> dictionary = sides_lengths();
+    float lA = dictionary[A_];
+    float lB = dictionary[B_];
+    float lC = dictionary[C_];
+    float p = (lA + lB + lC) / 2;
+    return sqr((p - lA) * (p - lB) * (p - lC) * p);
 }
