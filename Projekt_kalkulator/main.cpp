@@ -36,9 +36,7 @@ std::vector<int> type_size_matrix(){
         std::cout << "Podaj ilosc kolumn macierzy: ";
         std::cin >> cols;
     }
-    std::vector<int>size;
-    size.push_back(cols);
-    size.push_back(rows);
+    std::vector<int>size = {cols,rows};
     return size;
 }
 
@@ -102,6 +100,7 @@ int main() {
                     << "Wybierz operacje jaka chcesz wykonac \n 1 -dodawanie \n 2 - iloczyn skalarny \n 3 - mnozenie przez skalar \n";
             std::cin >> odp;
             if (odp == 1) { //dodawanie
+                std::cout << "";
                 int size = type_size_vec();
                 std::vector<int> v1 = type_vec(size);
                 std::vector<int> v2 = type_vec(size);
@@ -126,17 +125,29 @@ int main() {
             std::cin >> odp;
 
             if (odp == 1) { //dodawanie
+                std::cout<<"Podaj rozmiar macierzy. \n";
                 std::vector<int> size = type_size_matrix();
+                std::cout<<"Podaj pierwsza macierz. \n";
                 Matrix matrix_1 = type_matrix(size[0], size[1]);
+                std::cout<<"Podaj druga macierz. \n";
                 Matrix matrix_2 = type_matrix(size[0], size[1]);
                 std::cout << "Suma  to: " << matrix_to_string(add_matrices(matrix_1, matrix_2));
             }
             if (odp == 2) { //iloczyn
-                std::vector<int> size = type_size_matrix();
                 std::cout << "Podaj lewa macierz\n ";
-                Matrix matrix_1 = type_matrix(size[0], size[1]);
+                std::vector<int> size_1 = type_size_matrix();
+                while(size_1[0] == 0 and size_1[1] == 0){
+                    std::cout <<"Rozmiar macierzy musi być wiekszy od 0x0, wpisz rozmiar macierzy jeszcze raz: \n";
+                    size_1 = type_size_matrix();
+                }
+                Matrix matrix_1 = type_matrix(size_1[0], size_1[1]);
                 std::cout << "\n Podaj prawa macierz\n ";
-                Matrix matrix_2 = type_matrix(size[0], size[1]);
+                std::vector<int> size_2 = type_size_matrix();
+                while(size_2[0] != size_1[1]){
+                    std::cout<<" Ilosc wierszy prawej macierzy musi byc rowna iloci kolumn lewej macierzy, czyli: " << size_1[1]<<"\n Wpisz rozmiar macierzy jeszcze raz ";
+                    size_2 = type_size_matrix();
+                }
+                Matrix matrix_2 = type_matrix(size_2[0], size_2[1]);
                 std::cout << "\nIloczyn macierzy to " << matrix_to_string(multiply_matrices(matrix_1, matrix_2));
             }
             if (odp == 3) { //macierz transponowana
@@ -146,6 +157,10 @@ int main() {
             }
             if (odp == 4) { //wyznacznik macierzy
                 std::vector<int> size = type_size_matrix();
+                while(size[0] != size[1]){
+                    std::cout <<"Macierz musi byc kwadratowa (wymiary nxn), wpisz rozmiar macierzy jeszcze raz: \n";
+                    size = type_size_matrix();
+                }
                 Matrix matrix_1 = type_matrix(size[0], size[1]);
                 std::cout << "Wyzancznik macierzy to:  " << matrix_determinant(matrix_1);
             }
