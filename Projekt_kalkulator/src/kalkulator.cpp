@@ -1,4 +1,4 @@
-#include "kalkulator.hpp"
+#include "../include/kalkulator.hpp"
 #include <cstdlib>
 #include <iostream>
 #include <cmath>
