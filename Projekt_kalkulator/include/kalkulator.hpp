@@ -242,6 +242,8 @@ class Triangle
         Point get_b() const {return B_;}
         Point get_c() const {return C_;}
         std::map<Point, float> sides_lengths();
+        std::map<Point, float> angles();
+        Point center_of_mass();
         float triangle_area();
     private:
         Point A_;

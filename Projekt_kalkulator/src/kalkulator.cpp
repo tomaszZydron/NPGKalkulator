@@ -249,7 +249,7 @@ int intmax(int a, int b)
 //suma wielomianów
 Polynomial add_polynomials(const Polynomial& p1, const Polynomial& p2)
 {
-    std::size_t size = size_t_max(p1.get_size(), p2.get_size());
+
     if(p1.get_size() > p2.get_size())
     {
         Polynomial sumvect = p1;
@@ -631,4 +631,24 @@ float Triangle::triangle_area()
     float lC = dictionary[C_];
     float p = (lA + lB + lC) / 2;
     return sqr((p - lA) * (p - lB) * (p - lC) * p);
+}
+
+std::map<Point, float> Triangle::angles()
+{
+    std::map<Point, float> dictionary = sides_lengths();
+    float lA = dictionary[A_];
+    float lB = dictionary[B_];
+    float lC = dictionary[C_];
+    float alpha = 180 / M_PI * acos((pow(lB, 2) + pow(lC, 2) - pow(lA, 2))/(2 * lB * lC));
+    float betha = 180 / M_PI * acos((pow(lA, 2) + pow(lC, 2) - pow(lB, 2))/(2 * lA * lC));
+    float gamma = 180 / M_PI * acos((pow(lB, 2) + pow(lA, 2) - pow(lC, 2))/(2 * lB * lA));
+    std::map<Point, float> dictionary2 {
+            {A_, alpha}, {B_, betha}, {C_, gamma}
+    };
+    return dictionary2;
+}
+Point Triangle::center_of_mass()
+{
+    Point center = Point((A_.get_x()+B_.get_x()+C_.get_x())/3,(A_.get_y()+B_.get_y()+C_.get_y())/3);
+    return center;
 }

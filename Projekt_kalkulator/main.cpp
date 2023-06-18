@@ -92,7 +92,7 @@ float type_polynomial(int size){
 
 int main() {
     std::cout << "Witaj uzytkowniku w kalkulatorze matematycznym  :P ";
-    std::cout << "Wybierz na czym chcesz wykonać operacje \n 1 - wektory \n 2 - macierze \n 3 - wielomiany  \n";
+    std::cout << "Wybierz na czym chcesz wykonać operacje \n 1 - wektory \n 2 - macierze \n 3 - wielomiany  \n 5 - trojkaty\n";
     int odp;
     std::cin >> odp;
     if (odp == 1) { //wektor
@@ -172,6 +172,68 @@ int main() {
     else if (odp == 3) { //wielomiany
         std::cout << "";
         std::cin >> odp;
+    }
+    else if (odp == 5) //geometria
+    {
+        float x, y;
+        std::cout << "\npodaj wspolrzedna x punktu A: ";
+        std::cin >> x;
+        std::cout << "\npodaj wspolrzedna y punktu A: ";
+        std::cin >> y;
+        Point A = Point(x, y);
+        std::cout << "\npodaj wspolrzedna x punktu B: ";
+        std::cin >> x;
+        std::cout << "\npodaj wspolrzedna y punktu B: ";
+        std::cin >> y;
+        Point B = Point(x, y);
+        std::cout << "\npodaj wspolrzedna x punktu C: ";
+        std::cin >> x;
+        std::cout << "\npodaj wspolrzedna y punktu C: ";
+        std::cin >> y;
+        Point C = Point(x, y);
+        Triangle t = Triangle(A, B, C);
+        odp = 0;
+        while(odp != 5) {
+            std::cout
+                    << "Wybierz operacje jaka chcesz wykonac \n 1 - pole trojkata \n 2 - dlugosci bokow trojkata \n 3 - katy trojkata \n 4 - srodek ciezkosci trojkata\n 5- wyjscie\n";
+            std::cin >> odp;
+            switch (odp) {
+                case 1: {
+                    std::cout << "Pole trojkata to " << t.triangle_area() << "\n";
+                    break;
+                }
+                case 2: {
+                    std::map<Point, float> dictionary = t.sides_lengths();
+                    std::cout << "lA = " << dictionary[t.get_a()] << std::endl;
+                    std::cout << "lB = " << dictionary[t.get_b()] << std::endl;
+                    std::cout << "lC = " << dictionary[t.get_c()] << std::endl;
+                    break;
+                }
+                case 3:
+                {
+                    std::map<Point, float> dictionary = t.angles();
+                    std::cout << "kat przy wierzcholku A = " << dictionary[t.get_a()] << std::endl;
+                    std::cout << "kat przy wierzcholku B = " << dictionary[t.get_b()] << std::endl;
+                    std::cout << "kat przy wierzcholku C = " << dictionary[t.get_c()] << std::endl;
+                    break;
+                }
+                case 4:
+                {
+                    Point center = t.center_of_mass();
+                    std::cout << "Srodek ciezkosci to (" << center.get_x() <<", " <<center.get_y() <<")\n";
+                    break;
+                }
+                case 5:
+                {
+                    break;
+                }
+                default:
+                {
+                    std::cout << "niepoprawne wejscie, sprobuj jeszcze raz: ";
+                    break;
+                }
+            }
+        }
     }
     return 0;
 }
