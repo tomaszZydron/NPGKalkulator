@@ -150,7 +150,7 @@ void multiply_row(Matrix& m, int row, double c){
 //dodawanie wiersza razy skalar
 void add_row(Matrix& m, int row_1, int row_2, double c){
     for(size_t i = 0; i < m[0].size(); i++){
-        m[row_1][i] = c * m[row_2][i];
+        m[row_1][i] += c * m[row_2][i];
     }
 }
 
