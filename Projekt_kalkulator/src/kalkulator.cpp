@@ -7,6 +7,7 @@
 #include <numeric>
 #include <string>
 #include <math.h>
+#include <algorithm>
 
 //norma wektora
 double Vect::norm() const {
@@ -560,8 +561,74 @@ Line::Line(const Point& A,const Point& B)
 //: A_(1), B_((B.get_y()-A.get_y())/(B.get_x()-A.get_x())), C_(-A.get_x()-A.get_y()*(B.get_y()-A.get_y())/(B.get_x()-A.get_x()))
 
 
-float distance(const Point& A, const Line& line)
+float distance_point_line(const Point& A, const Line& line)
 {
     return abs(line.get_a()*A.get_x()+line.get_b()*A.get_y()+line.get_c())/sqrt(pow(line.get_a(),2)+pow(line.get_b(),2));
 }
 
+float distance_point_point(const Point& A, const Point& B)
+{
+    return sqr(pow(A.get_x()-B.get_x(),2)+pow(A.get_y()-B.get_y(),2));
+}
+
+float distance_line_line(const Line& l1, const Line& l2)
+{
+    if(l1.get_b() / l1.get_a() == l2.get_b() / l2.get_a() || l1.get_a() / l1.get_b() == l2.get_a() / l2.get_b() )
+    {
+        return abs(l1.get_c() - l2.get_c()) / sqr(pow(l1.get_a(), 2) + pow(l1.get_b(), 2));
+    }
+    else return 0;
+}
+bool operator<(const Point& lhs, const Point& rhs)
+{
+    if (lhs.get_x() < rhs.get_x())
+        return true;
+    if (lhs.get_x() > rhs.get_x())
+        return false;
+    return lhs.get_y() < rhs.get_y();
+}
+bool Point::operator==(const Point& other)
+{
+    if(x_ == other.get_x() && y_ == other.get_y()) return true;
+    else return false;
+}
+//zwraca dlugosc boku naprzeciwko danego punktu
+std::map<Point, float> Triangle::sides_lengths()
+{
+    float lA = distance_point_point(B_, C_);
+    float lB = distance_point_point(A_, C_);
+    float lC = distance_point_point(B_, A_);
+    std::map<Point, float> dictionary {
+            {A_, lA}, {B_, lB}, {C_, lC}
+    };
+    return dictionary;
+}
+float Triangle::triangle_area()
+{
+    std::map<Point, float> dictionary = sides_lengths();
+    float lA = dictionary[A_];
+    float lB = dictionary[B_];
+    float lC = dictionary[C_];
+    float p = (lA + lB + lC) / 2;
+    return sqr((p - lA) * (p - lB) * (p - lC) * p);
+}
+
+std::map<Point, float> Triangle::angles()
+{
+    std::map<Point, float> dictionary = sides_lengths();
+    float lA = dictionary[A_];
+    float lB = dictionary[B_];
+    float lC = dictionary[C_];
+    float alpha = 180 / M_PI * acos((pow(lB, 2) + pow(lC, 2) - pow(lA, 2))/(2 * lB * lC));
+    float betha = 180 / M_PI * acos((pow(lA, 2) + pow(lC, 2) - pow(lB, 2))/(2 * lA * lC));
+    float gamma = 180 / M_PI * acos((pow(lB, 2) + pow(lA, 2) - pow(lC, 2))/(2 * lB * lA));
+    std::map<Point, float> dictionary2 {
+            {A_, alpha}, {B_, betha}, {C_, gamma}
+    };
+    return dictionary2;
+}
+Point Triangle::center_of_mass()
+{
+    Point center = Point((A_.get_x()+B_.get_x()+C_.get_x())/3,(A_.get_y()+B_.get_y()+C_.get_y())/3);
+    return center;
+}
