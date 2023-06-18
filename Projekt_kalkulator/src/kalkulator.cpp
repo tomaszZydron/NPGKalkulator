@@ -70,7 +70,7 @@ std::string vector_to_string(const Vect& v){
     return to_string.str();
 }
 
-//konstruktor kopiujący?
+
 Matrix::Matrix(const std::vector<std::vector<double>>& m) {
     std::copy(m.begin(), m.end(), std::back_inserter(matrix_));
 }
@@ -187,27 +187,7 @@ void echelon_form(Matrix& m){
     }
 }
 
-//
-int **submatrix(int **matrix, int n, int x, int y) {
-    int **submatrix = new int *[n - 1];
-    int subi = 0;
-    for (int i = 0; i < n; i++) {
-        submatrix[subi] = new int[n - 1];
-        int subj = 0;
-        if (i == y) {
-            continue;
-        }
-        for (int j = 0; j < n; j++) {
-            if (j == x) {
-                continue;
-            }
-            submatrix[subi][subj] = matrix[i][j];
-            subj++;
-        }
-        subi++;
-    }
-    return submatrix;
-}
+
 
 //liczenie wyznacznika macierzy
 double matrix_determinant(Matrix& m){
@@ -248,7 +228,7 @@ int intmax(int a, int b)
 //suma wielomianów
 Polynomial add_polynomials(const Polynomial& p1, const Polynomial& p2)
 {
-    std::size_t size = size_t_max(p1.get_size(), p2.get_size());
+    //std::size_t size = size_t_max(p1.get_size(), p2.get_size());
     if(p1.get_size() > p2.get_size())
     {
         Polynomial sumvect = p1;

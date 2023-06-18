@@ -112,7 +112,7 @@ void swap_rows(Matrix& m, int row_1, int row_2);
 void echelon_form(Matrix& m);
 
 //liczenie wyznacznika macierzy
-double matrix_determinant(const Matrix& m);
+double matrix_determinant(Matrix& m);
 
 
 //klasa odpowiadająca za wielomiany
