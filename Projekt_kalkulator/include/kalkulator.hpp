@@ -9,6 +9,8 @@
 #include <tuple>
 #include <map>
 
+//WEKTORY
+
 //klasa odpowiadająca za wektory
 class Vect {
 public:
@@ -55,6 +57,8 @@ bool two_vector_dependance(const Vect& v1, const Vect& v2);
 //wektor na stringa
 std::string vector_to_string(const Vect& v);
 
+
+//MACIERZE
 
 //klasa odpowiadająca za macierze
 class Matrix {
@@ -116,6 +120,8 @@ void echelon_form(Matrix& m);
 double matrix_determinant(Matrix& m);
 
 
+//WIELOMIANY
+
 //klasa odpowiadająca za wielomiany
 class Polynomial{
 public:
@@ -151,6 +157,21 @@ Polynomial derivate(const Polynomial& polinomial);
 
 Polynomial integral(const Polynomial& polinomial);
 
+Polynomial polynomial_multiplication(const Polynomial& p1, const Polynomial& p2);
+
+float pow(float a, int power);
+
+float value(const Polynomial& polynomial, float val);
+
+Polynomial multiplicate_polynomial(const Polynomial& p, float a);
+
+float sqr(float a, int n = 2, int accuracy = 100000);
+
+std::tuple<Polynomial, float> divide(const Polynomial& p, float x);
+
+
+//LICZBY ZESPOLONE
+
 //klasa liczb zespolonych
 class Complex{
 public:
@@ -182,18 +203,8 @@ std::string complex_euler_string(Complex z);
 //Pierwiastkowanie liczb zespolonych
 std::string ComplexRoot(Complex z, int degree);
 
-Polynomial polynomial_multiplication(const Polynomial& p1, const Polynomial& p2);
 
-float pow(float a, int power);
-
-float value(const Polynomial& polynomial, float val);
-
-Polynomial multiplicate_polynomial(const Polynomial& p, float a);
-
-float sqr(float a, int n = 2, int accuracy = 100000);
-
-std::tuple<Polynomial, float> divide(const Polynomial& p, float x);
-
+//GEOMETRIA
 int sn(int n, int k);
 
 class Point

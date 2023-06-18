@@ -9,6 +9,8 @@
 #include <math.h>
 #include <algorithm>
 
+//WEKTORY
+
 //norma wektora
 double Vect::norm() const {
     return sqrt(std::accumulate(std::begin(v_), std::end(v_), 0.0,[](auto acc, auto elem) { return acc + elem * elem; }));
@@ -71,7 +73,9 @@ std::string vector_to_string(const Vect& v){
     return to_string.str();
 }
 
+//MACIERZE
 
+//konstruktor kopiujacy
 Matrix::Matrix(const std::vector<std::vector<double>>& m) {
     std::copy(m.begin(), m.end(), std::back_inserter(matrix_));
 }
@@ -188,8 +192,6 @@ void echelon_form(Matrix& m){
     }
 }
 
-
-
 //liczenie wyznacznika macierzy
 double matrix_determinant(Matrix& m){
     double det = 1;
@@ -212,6 +214,8 @@ double matrix_determinant(Matrix& m){
     }
     return det;
 }
+
+//WIELOMIANY
 
 //funkcja zwracająca większą liczbę
 std::size_t size_t_max(std::size_t a, std::size_t b)
@@ -283,6 +287,87 @@ Polynomial integral(const Polynomial& polinomial)
     }
     return integral_pol;
 }
+
+//mnożenie wielomianów
+Polynomial polynomial_multiplication(const Polynomial& p1, const Polynomial& p2)
+{
+    Polynomial result = Polynomial(p1.get_size() + p2.get_size() - 1);
+    for(int i = 0; i < p1.get_size(); i++)
+    {
+        for(int j = 0; j < p2.get_size(); j++)
+        {
+            result[i+j] += p1[i] * p2[j];
+        }
+    }
+    return result;
+}
+//potęga liczby
+float pow(float a, int power)
+{
+    float answer = 1;
+    if (power >= 0) {
+        for (int i = 0; i < power; i++) {
+            answer *= a;
+        }
+    }
+    for (int i = 0; i > power; i--) {
+        answer /= a;
+    }
+    return answer;
+}
+//wartość wielomianu dla argumentu
+float value(const Polynomial& polynomial, float val)
+{
+    float result = 0;
+    std::size_t size = polynomial.get_size();
+    for(int i = 0; i < (int) size; i++) result += polynomial[i] * pow(val, i);
+    return result;
+}
+
+//mnożenie wielomianu przez skalar
+Polynomial multiplicate_polynomial(const Polynomial& p, float a)
+{
+    Polynomial result = p;
+    for(int i = 0; i < p.get_size(); i++) result[i] *= a;
+    return result;
+}
+//znajdowanie pierwiastków
+float sqr(float a, int n, int accuracy) {
+    if (a < 0 && n % 2 == 0) {
+        throw std::invalid_argument("Error. Trying to calculate even root of negative number.");
+    }
+
+    Polynomial pom = Polynomial(n + 1);
+    pom[0] = -a;
+    pom[n] = 1;
+    float answer = 1;
+    if (pow(answer, n) == a) return answer;
+    Polynomial der = derivate(pom);
+    Polynomial line = Polynomial(2);
+    for (int i = 0; i < accuracy; i++) {
+        line[1] = value(der, answer);
+        line[0] = value(pom, answer) - line[1] * answer;
+        answer = -line[0] / line[1];
+    }
+    return answer;
+}
+std::tuple<Polynomial, float> divide(const Polynomial& p, float x)
+{
+    std::vector<Polynomial> v;
+    float rest = 0;
+    Polynomial pom = Polynomial(p.get_size() - 1);
+    pom[p.get_size() - 2] = p[p.get_size() - 1];
+    for(int i = int(p.get_size()) - 3; i >= 0; i--)
+    {
+        pom[i] = pom[i + 1] * x + p[i + 1];
+    }
+    rest = pom[0] * x + p[0];
+    return std::make_tuple(pom, rest);
+
+
+}
+
+//LICZBY ZESPOLONE
 
 //Dodawanie liczb zespolonych
 Complex ComplexAdd(Complex z1, Complex z2) {
@@ -444,84 +529,8 @@ std::string ComplexRoot(Complex z, int degree) {
     return answers.str();
 }
 
-//mnożenie wielomianów
-Polynomial polynomial_multiplication(const Polynomial& p1, const Polynomial& p2)
-{
-    Polynomial result = Polynomial(p1.get_size() + p2.get_size() - 1);
-    for(int i = 0; i < p1.get_size(); i++)
-    {
-        for(int j = 0; j < p2.get_size(); j++)
-        {
-            result[i+j] += p1[i] * p2[j];
-        }
-    }
-    return result;
-}
-//potęga liczby
-float pow(float a, int power)
-{
-    float answer = 1;
-    if (power >= 0) {
-        for (int i = 0; i < power; i++) {
-            answer *= a;
-        }
-    }
-    for (int i = 0; i > power; i--) {
-        answer /= a;
-    }
-    return answer;
-}
-//wartość wielomianu dla argumentu
-float value(const Polynomial& polynomial, float val)
-{
-    float result = 0;
-    std::size_t size = polynomial.get_size();
-    for(int i = 0; i < (int) size; i++) result += polynomial[i] * pow(val, i);
-    return result;
-}
 
-//mnożenie wielomianu przez skalar
-Polynomial multiplicate_polynomial(const Polynomial& p, float a)
-{
-    Polynomial result = p;
-    for(int i = 0; i < p.get_size(); i++) result[i] *= a;
-    return result;
-}
-//znajdowanie pierwiastków
-float sqr(float a, int n, int accuracy) {
-    if (a < 0 && n % 2 == 0) {
-        throw std::invalid_argument("Error. Trying to calculate even root of negative number.");
-    }
-
-    Polynomial pom = Polynomial(n + 1);
-    pom[0] = -a;
-    pom[n] = 1;
-    float answer = 1;
-    if (pow(answer, n) == a) return answer;
-    Polynomial der = derivate(pom);
-    Polynomial line = Polynomial(2);
-    for (int i = 0; i < accuracy; i++) {
-        line[1] = value(der, answer);
-        line[0] = value(pom, answer) - line[1] * answer;
-        answer = -line[0] / line[1];
-    }
-    return answer;
-}
-std::tuple<Polynomial, float> divide(const Polynomial& p, float x)
-{
-    std::vector<Polynomial> v;
-    float rest = 0;
-    Polynomial pom = Polynomial(p.get_size() - 1);
-    pom[p.get_size() - 2] = p[p.get_size() - 1];
-    for(int i = int(p.get_size()) - 3; i >= 0; i--)
-    {
-        pom[i] = pom[i + 1] * x + p[i + 1];
-    }
-    rest = pom[0] * x + p[0];
-    return std::make_tuple(pom, rest);
-
-
-}
+//GEOMETRIA
 
 int sn(int n, int k)
 {

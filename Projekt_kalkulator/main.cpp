@@ -45,9 +45,9 @@ std::vector<std::vector<double>> type_matrix(int rows, int cols){
     double value = 0;
     for (int x = 0 ; x < cols ; x++) {
         std::vector<double> column;
-        std::cout << "Wypisz " << x+1 << " kolumne \n";
+        std::cout << "Wpisz " << x+1 << " kolumne \n";
         for(int y = 0; y <rows ; y++){
-            std::cout << "Wypisz " << y+1 << " wartosc: ";
+            std::cout << "Wpisz " << y+1 << " wartosc: ";
             std::cin >> value;
             column.push_back(value);
         }
@@ -109,7 +109,7 @@ int main() {
     while (should_calc_work == true) {
         std::cout << "Witaj uzytkowniku w kalkulatorze matematycznym  :P ";
         std::cout
-                << "Wybierz na czym chcesz wykonać operacje \n 1 - wektory \n 2 - macierze \n 3 - wielomiany  \n 4 - liczby zespolone \n  5 - trojkaty\n";
+                << "Wybierz na czym chcesz wykonac operacje \n 1 - wektory \n 2 - macierze \n 3 - wielomiany  \n 4 - liczby zespolone \n  5 - trojkaty\n";
         int odp;
         std::cin >> odp;
             if (odp == 1) { //wektor
@@ -416,7 +416,7 @@ int main() {
             }
 
             std::string ans;
-            std::cout << "\n \n czy chcesz wykonać kolejne działanie T/N: ";
+            std::cout << "\n \n Czy chcesz wykonac kolejne dzialanie T/N: ";
             std::cin >> ans;
             if (ans == "N" or ans == "n" or ans == "nie" or ans == "Nie") {
                 should_calc_work = false;
