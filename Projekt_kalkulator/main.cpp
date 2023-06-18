@@ -27,12 +27,12 @@ std::vector<double> type_vec(int size ){
 
 std::vector<int> type_size_matrix(){
     int rows = 0;
-    while (rows <= 1){
+    while (rows < 1){
         std::cout << "Podaj ilosc wierszy macierzy: ";
         std::cin >> rows;
     }
     int cols = 0;
-    while (cols <= 1){
+    while (cols <1){
         std::cout << "Podaj ilosc kolumn macierzy: ";
         std::cin >> cols;
     }
@@ -45,7 +45,7 @@ std::vector<std::vector<double>> type_matrix(int rows, int cols){
     double value = 0;
     for (int x = 0 ; x < cols ; x++) {
         std::vector<double> column;
-        std::cout << "Wpisz " << x+1 << " kolumne \n";
+        std::cout << "Wpisz " << x+1 << " wiersz \n";
         for(int y = 0; y <rows ; y++){
             std::cout << "Wpisz " << y+1 << " wartosc: ";
             std::cin >> value;
